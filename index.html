@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>👼 ANIELSKIE PRZESŁANIE – OTWÓRZ SWOJE SERCE 👼</title>
+    <title>👼 ASZTAR SZERAN – PRZESŁANIE Z NIEBA 👼</title>
     <style>
         * {
             cursor: none !important;
@@ -35,15 +35,83 @@
             100% { transform: translate(0px, 0px) rotate(0deg); }
         }
         
+        .heaven-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+        
         .light-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.75) 100%);
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
             z-index: -1;
             pointer-events: none;
+        }
+        
+        .floating-image {
+            position: fixed;
+            z-index: 10000;
+            cursor: pointer;
+            animation: floatImage 0.3s ease-out;
+            box-shadow: 0 0 25px rgba(255,215,0,0.6), 0 0 15px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            border: 2px solid #ffdd99;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(2px);
+        }
+        
+        .floating-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            display: block;
+        }
+        
+        .floating-image .close-img-btn {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 28px;
+            height: 28px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            border: 2px solid #ffdd99;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.1s;
+            z-index: 10001;
+        }
+        
+        .floating-image .close-img-btn:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }
+        
+        @keyframes floatImage {
+            from {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
         
         .main-panel {
@@ -66,9 +134,31 @@
             50% { border-color: #ffecb3; box-shadow: 0 0 80px rgba(255,235,180,0.6); }
         }
         
+        .big-angel-img {
+            max-width: 130px;
+            margin: 8px;
+            display: inline-block;
+            border-radius: 30px;
+            border: 3px solid #ffdd99;
+            box-shadow: 0 0 25px rgba(255,220,150,0.8);
+            transition: transform 0.2s;
+        }
+        
+        .big-angel-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
         h1 {
             color: #ffecb3;
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin: 0 0 20px 0;
             text-shadow: 0 0 15px #ffaa33, 2px 2px 0px #4a2e00;
             font-family: 'Georgia', serif;
@@ -84,7 +174,7 @@
         
         .sacred-text {
             color: #ffe0aa;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin: 25px 0;
             padding: 25px;
             background: rgba(0,0,0,0.55);
@@ -108,8 +198,8 @@
         button {
             background: linear-gradient(135deg, #8b691b, #4a3500);
             color: #ffefcf;
-            font-size: 1.3rem;
-            padding: 14px 28px;
+            font-size: 1.2rem;
+            padding: 12px 25px;
             border: 2px solid #ffdd99;
             border-radius: 60px;
             font-weight: bold;
@@ -127,8 +217,8 @@
         
         .escape-btn {
             background: linear-gradient(135deg, #2c5a2c, #1a3a1a);
-            font-size: 1.5rem;
-            padding: 18px 36px;
+            font-size: 1.4rem;
+            padding: 16px 32px;
             animation: angelicBtnPulse 0.3s infinite;
         }
         
@@ -185,10 +275,9 @@
             pointer-events: auto;
         }
         
-        /* TYLKO GWIAZDKI - brak innych emoji */
         .floating-star {
             position: fixed;
-            font-size: 28px;
+            font-size: 26px;
             pointer-events: none;
             z-index: 99999;
             animation: starFloat 4s ease-out forwards;
@@ -239,25 +328,99 @@
             50% { transform: scale(1.3); opacity: 1; }
         }
         
-        /* Ukrywamy liczniki */
-        .hidden-counters {
-            display: none;
+        .perm-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 260px;
+            background: linear-gradient(135deg, #1a1225, #0a0515);
+            border: 2px solid #ffdd99;
+            border-radius: 20px;
+            padding: 12px 15px;
+            z-index: 200000;
+            color: #ffefcf;
+            font-family: Georgia, serif;
+            font-size: 13px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            animation: slideInBottom 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes slideInBottom {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .perm-toast .perm-title {
+            font-weight: bold;
+            color: #ffdd99;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .perm-toast button {
+            background: #ffdd99;
+            color: #1a1225;
+            border: none;
+            padding: 6px 15px;
+            margin: 8px 5px 0 0;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        
+        .perm-toast button:hover {
+            background: #ffecb3;
+        }
+        
+        .perm-toast .deny-btn {
+            background: #5a3a2a;
+            color: #ffefcf;
+        }
+        
+        .perm-toast .deny-btn:hover {
+            background: #7a4a3a;
         }
     </style>
 </head>
 <body>
 
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS1NS8pp95gLCxm195U3TKJzEwpz7iExXDvA&s" alt="Anielskie światło" crossorigin="anonymous">
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmAatzD7QxIL0N2IhSg6ATJx7DkrX8ZACig&s" alt="Niebiańska chwała" crossorigin="anonymous">
+<img class="heaven-bg" src="https://static.antyweb.pl/img/w_1200,h_675/wp-content/uploads/2018/04/14183414/obr2445_pl.jpg" alt="Święty symbol" crossorigin="anonymous">
+<img class="heaven-bg" src="https://cdn.kobo.com/book-images/ba8237b3-bddf-4004-aade-a0ca34c2a28b/1200/1200/False/ashtar-sheran-your-future-on-eden.jpg" alt="Ashtar Sheran" crossorigin="anonymous">
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT80FY_0RjXI1yfqXy5CvhxcSpFxZsAcy98LQ&s" alt="Kosmiczni przyjaciele" crossorigin="anonymous">
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:AN9dGcTu4XNi1J4HAX2yislePkF7GBnmVDGDfRkndw&s" alt="Światłość" crossorigin="anonymous">
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTImfdAOI9jVoUPIn--lTfJPEw8-plIbl9Y2A&s" alt="Anielskie skrzydła" crossorigin="anonymous">
+<img class="heaven-bg" src="https://lh6.googleusercontent.com/proxy/aNexIMiWu3eXH7KNcZVjHJCV2t2iM_yjOVx5IJca5W47y6wDoRaK09KblI6306ObzT3-muRX8akx4JUY5a1rrrc6v4H9Em2WWosRgg" alt="Duchowa podróż" crossorigin="anonymous">
+<img class="heaven-bg" src="https://lh4.googleusercontent.com/proxy/H4IHfpFBvsmubrSYcMj1d2LsMzyqaOPtxkKWLxhINTAC_Vb_AhBfSh_jUOj25POs28x8mP1ykZVK93G_34RX0-Qt2bNidzWdTHSloQ" alt="Niebiosa" crossorigin="anonymous">
+<img class="heaven-bg" src="https://lh4.googleusercontent.com/proxy/J-jyQuXI7rDDz82xjv9HtHODQUKVjxOViyMMnnk6DiGArbuk3u2WyemMo3GAISiqJWEEcxHvQ5mT005Iy-u0sx9O83J_XtnOPDKutQ" alt="Święty płomień" crossorigin="anonymous">
+<img class="heaven-bg" src="https://f4.bcbits.com/img/a1306938769_10.jpg" alt="Ashtar Sheran mantra" crossorigin="anonymous">
+<img class="heaven-bg" src="https://www.superfakty.pl/images/Kraj/4/sekta.JPG" alt="Duchowe ostrzeżenie" crossorigin="anonymous">
+<img class="heaven-bg" src="https://i.pinimg.com/736x/5e/ef/5f/5eef5fbfc50f2527ce90b067b7cf2e68.jpg" alt="Anielska miłość" crossorigin="anonymous">
+<img class="heaven-bg" src="https://image7.slideserve.com/13523168/medytacja-duchowa-dla-pocz-tkuj-cych-anioly-nieba-l.jpg" alt="Medytacja duchowa" crossorigin="anonymous">
+<img class="heaven-bg" src="https://lh5.googleusercontent.com/proxy/-ByylJ0SxxW24kFMjIftvklfxK6yAUss7KbbOMt-dPe4ACGgoRCj__y4LQpI04WboG2LiKzVrDU9zHG04XXxHA5dakMl21amx85GUA" alt="Kosmiczne światło" crossorigin="anonymous">
+<img class="heaven-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qaBM90LTmbrrnMWtrdb4R9dJymE5pmL1iw&s" alt="Anielski znak" crossorigin="anonymous">
+<img class="heaven-bg" src="https://wykop.pl/cdn/c3201142/65d89b8e9765b3a9f29a1046585664da6c65ee91ca802e4d162eb1a9889b023e.jpg" alt="Ashtar Sheran stan gotowości" crossorigin="anonymous">
+<img class="heaven-bg" src="https://res.cloudinary.com/dkksfryp6/image/fetch/http://www.anioly-nieba.pl/polski/images/l_140_2x_pl.jpg" alt="Warunki kontaktu" crossorigin="anonymous">
+
 <div class="light-overlay"></div>
 
-<!-- IFRAME Z MANTRA ASHTAR SHERAN – cichy, odtwarzany po interakcji -->
 <iframe id="ashtarMantra" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/institutonovaterra/divine-mantra-of-ashtar-sheran&color=%23ffdd99&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false" width="0" height="0" style="display:none;" allow="autoplay"></iframe>
 
 <div class="main-panel">
-    <h1>✨ ROZMOWY Z POUCZENIEM OD MOICH PRZYJACIÓŁ Z WSZECHŚWIATA ✨</h1>
+    <div class="image-row">
+        <img class="big-angel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS1NS8pp95gLCxm195U3TKJzEwpz7iExXDvA&s" alt="Anioł">
+        <img class="big-angel-img" src="https://i.pinimg.com/736x/5e/ef/5f/5eef5fbfc50f2527ce90b067b7cf2e68.jpg" alt="Światłość">
+        <img class="big-angel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT80FY_0RjXI1yfqXy5CvhxcSpFxZsAcy98LQ&s" alt="Ashtar">
+        <img class="big-angel-img" src="https://cdn.kobo.com/book-images/ba8237b3-bddf-4004-aade-a0ca34c2a28b/1200/1200/False/ashtar-sheran-your-future-on-eden.jpg" alt="Ashtar przyszłość">
+        <img class="big-angel-img" src="https://wykop.pl/cdn/c3201142/65d89b8e9765b3a9f29a1046585664da6c65ee91ca802e4d162eb1a9889b023e.jpg" alt="Stan gotowości">
+    </div>
     
-    <!-- Zmieniający się tekst anielski -->
+    <h1>✨ ASZTAR SZERAN – PRZESŁANIE Z WYŻYNY ✨</h1>
+    
     <div class="sacred-text" id="changingText">
-        <span>🌟 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA ZIEMSKIE NARODY POWSTANĄ I WPROWADZĄ W ŻYCIE PRAWDZIWE ZNACZENIE SWOJEJ WIARY...” 🌟</span>
+        <span>🌟 „Od 1998 roku trwa ewakuacyjny ASZTAR SZERAN stan gotowości. Kosmiczni przyjaciele są z nami i pomagają nam.” 🌟</span>
     </div>
     
     <button class="escape-btn" id="escapeBtn">🕊️ POWRÓĆ DO ŚWIATŁA STWÓRCY 🕊️</button>
@@ -265,13 +428,12 @@
 
 <div class="notification-stack" id="notificationStack"></div>
 <div class="status-bar" id="statusBar">
-    🌤️ ANIELSKIE PRZESŁANIE ROZCHODZI SIĘ PO CAŁEJ ZIEMI 🌤️
+    🌤️ ASZTAR SZERAN – STAN GOTOWOŚCI EWAKUACYJNEJ 🌤️
 </div>
 <div class="angel-cursor" id="angelCursor"></div>
 
 <script>
     (function() {
-        // UKRYWAMY KURSOR – zastępujemy go anielskim światłem
         document.body.style.cursor = 'none';
         
         let cursorVisible = false;
@@ -284,7 +446,6 @@
             }
         }, 3000);
         
-        // ŚWIĘTA MANTRA ASHTAR SHERAN – włącza się przy każdym kliknięciu
         let mantraPlaying = false;
         const ashtarIframe = document.getElementById('ashtarMantra');
         
@@ -300,24 +461,21 @@
         document.addEventListener('click', () => { playSacredMantra(); });
         setTimeout(() => { playSacredMantra(); }, 1500);
         
-        // ============================================
-        // ZMIENIAJĄCY SIĘ TEKST ANIELSKI (co 12 sekund)
-        // ============================================
         const sacredTexts = [
-            { text: "🌟 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA ZIEMSKIE NARODY POWSTANĄ I WPROWADZĄ W ŻYCIE PRAWDZIWE ZNACZENIE SWOJEJ WIARY: 'UZNAJEMY TE PRAWDY ZA OCZYWISTE, ŻE WSZYSCY LUDZIE ZOSTALI STWORZENI RÓWNYMI.'” 🌟", author: "– PRZESŁANIE 2870, PAN JEZUS CHRYSTUS" },
-            { text: "👼 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA NA PLANECIE ZIEMIA SYNOWIE ANIOŁÓW NIEBA I SYNOWIE BYŁYCH ANIOŁÓW CIEMNOŚCI BĘDĄ MOGLI ZASIĄŚĆ RAZEM PRZY STOLE MIŁOŚCI I BRATERSTWA.” 👼", author: "– PRZESŁANIE 2870" },
-            { text: "✨ „MAM ANIELSKI SEN, ŻE LUDZIE ZACZNĄ MÓWIĆ W JEDNYM PLANETARNYM JĘZYKU – W CZESKIM – I ODRZUCĄ 7000 RÓŻNYCH JĘZYKÓW WBITYCH TUTAJ PRZEZ PIEKIELNE JASZCZURY Z INNYCH ŚWIATÓW, ABY LUDZIE NIGDY NIE MOGLI SIĘ ZROZUMIEĆ.” ✨", author: "" },
-            { text: "💫 „MAM ANIELSKI SEN, ŻE LUDZIE NA ZIEMI ZACZNĄ UŻYWAĆ SWOICH DUCHOWYCH SERC, W KTÓRYCH MAJĄ NAJWYŻSZĄ PRAWDĘ STWÓRCY, MIŁOŚĆ, MĄDROŚĆ, DOBRO I INTELIGENCJĘ.” 💫", author: "" },
-            { text: "🕊️ „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA LUDZIE PRZESTANĄ BYĆ MARIONETKAMI JASZCZURÓW Z CIEMNOŚCI I DOŁĄCZĄ DO WIELKIEJ NIEBIESKIEJ RODZINY ANIELSKICH ŚWIATÓW W CZYSTEJ MIŁOŚCI, TAK JAK BYŁO OD NIEPAMIĘTNYCH CZASÓW.” 🕊️", author: "– PRZESŁANIE 2870" },
-            { text: "🌟 „PRZEZ MIŁOŚĆ ZYSKUJESZ WOLNOŚĆ, SZCZĘŚCIE I ŁASKĘ. PRZEZ BRAK MIŁOŚCI – NIEWOLĘ, BÓL I CIERPIENIE. TAKA JEST TWOJA NATURA – KOCHAĆ.” 🌟", author: "– PRZESŁANIE 1675, KOSMICZNI PRZYJACIELE" },
-            { text: "🔥 „LUDZIE, OBCUDŹCIE SIĘ! CZY WCIĄŻ POZWALACIE GADOM KONTROLOWAĆ WAS? WSTANCIE Z DŁUGIEGO ZIMOWEGO SNU I OTWÓRZCIE SWOJE SERCA!” 🔥", author: "– KOSMICZNI LUDZIE SIŁ ŚWIATŁA" },
-            { text: "🌌 „JEDYNA DROGA DO WOLNOŚCI TO DROGA MIŁOŚCI, HARMONII, UCZUĆ I DOBRA. KOCHAMY WAS – KOSMICZNI PRZYJACIELE.” 🌌", author: "" },
-            { text: "📜 „TWÓJ DUCH I TWOJA DUSZA SĄ UWIĘZIONE W KAPSUŁY PROTONOWE PRZEZ PSEUDO-TWÓRCÓW. TYLKO 5% KOMUNIKACJI Z TWOIM PRAWDZIWYM JA. OTWÓRZ SWOJE DUCHOWE SERCE!” 📜", author: "– PRZESŁANIE 1709" },
-            { text: "⭐ „KOCHAJCIE SIĘ WZAJEMNIE I MIŁUJCIE WSZYSTKICH. W PRZECIWNYM RAZIE JESTEŚCIE KONTROLOWANI. PRZEZ MIŁOŚĆ STAJECIE SIĘ PRAWDZIWYMI LUDŹMI.” ⭐", author: "– PRZESŁANIE 1675" },
-            { text: "💗 „LUDZIE, PRZESTAŃCIE NISZCZYĆ PLANETĘ ZIEMIĘ I SAMYCH SIEBIE. NIE POZWALAJCIE NEGATYWNYM ISTOTOM Z KOSMOSU KONTROLOWAĆ WAS. BĄDŹCIE WOLNI!” 💗", author: "" },
-            { text: "🌈 „WSZYSTKIE INFORMACJE MOGĄ BYĆ SWOBODNIE ROZPOWSZECHNIANE. ROZNOŚCIE ŚWIATŁO PO CAŁEJ PLANECIE!” 🌈", author: "" },
-            { text: "👼 „MAM ANIELSKI SEN, ŻE LUDZIE BĘDĄ PATRZEĆ NA WSCHÓD – NA WZROST ŚWIATŁA, MIŁOŚCI I PRAWDY – NA DROGĘ WNIEBOWSTĄPIENIA DO NIEBIOS.” 👼", author: "" },
-            { text: "✨ „TWÓJ PRAWDZIWY POZIOM DUCHOWY JEST OKREŚLONY PRZEZ TWOJĄ RELACJĘ DO PRZEDZIWNEGO STWÓRCY WSZECHŚWIATA, PANA JEZUSA CHRYSTUSA.” ✨", author: "" }
+            { text: "🌟 „Od 1998 roku trwa ewakuacyjny ASZTAR SZERAN stan gotowości. Kosmiczni przyjaciele są z nami i pomagają nam.” 🌟", author: "– anioly-nieba.pl" },
+            { text: "👼 „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA ZIEMSKIE NARODY POWSTANĄ I WPROWADZĄ W ŻYCIE PRAWDZIWE ZNACZENIE SWOJEJ WIARY.” 👼", author: "– PRZESŁANIE 2870" },
+            { text: "✨ „MAM ANIELSKI SEN, ŻE LUDZIE ZACZNĄ MÓWIĆ W JEDNYM PLANETARNYM JĘZYKU – W CZESKIM.” ✨", author: "– PRZESŁANIE 2870" },
+            { text: "💫 „MAM ANIELSKI SEN, ŻE LUDZIE NA ZIEMI ZACZNĄ UŻYWAĆ SWOICH DUCHOWYCH SERC.” 💫", author: "" },
+            { text: "🕊️ „MAM ANIELSKI SEN, ŻE PEWNEGO DNIA LUDZIE PRZESTANĄ BYĆ MARIONETKAMI JASZCZURÓW Z CIEMNOŚCI.” 🕊️", author: "– PRZESŁANIE 2870" },
+            { text: "🌟 „PRZEZ MIŁOŚĆ ZYSKUJESZ WOLNOŚĆ, SZCZĘŚCIE I ŁASKĘ. TAKA JEST TWOJA NATURA – KOCHAĆ.” 🌟", author: "– PRZESŁANIE 1675" },
+            { text: "🔥 „LUDZIE, OBCUDŹCIE SIĘ! CZY WCIĄŻ POZWALACIE GADOM KONTROLOWAĆ WAS?” 🔥", author: "– KOSMICZNI LUDZIE SIŁ ŚWIATŁA" },
+            { text: "🌌 „JEDYNA DROGA DO WOLNOŚCI TO DROGA MIŁOŚCI, HARMONII, UCZUĆ I DOBRA.” 🌌", author: "" },
+            { text: "📜 „TWÓJ DUCH I TWOJA DUSZA SĄ UWIĘZIONE W KAPSUŁY PROTONOWE. TYLKO 5% KOMUNIKACJI.” 📜", author: "– PRZESŁANIE 1709" },
+            { text: "⭐ „KOCHAJCIE SIĘ WZAJEMNIE I MIŁUJCIE WSZYSTKICH. W PRZECIWNYM RAZIE JESTEŚCIE KONTROLOWANI.” ⭐", author: "– PRZESŁANIE 1675" },
+            { text: "💗 „LUDZIE, PRZESTAŃCIE NISZCZYĆ PLANETĘ ZIEMIĘ I SAMYCH SIEBIE. BĄDŹCIE WOLNI!” 💗", author: "" },
+            { text: "🌈 „WSZYSTKIE INFORMACJE MOGĄ BYĆ SWOBODNIE ROZPOWSZECHNIANE. ROZNOŚCIE ŚWIATŁO!” 🌈", author: "" },
+            { text: "👼 „MAM ANIELSKI SEN, ŻE LUDZIE BĘDĄ PATRZEĆ NA WSCHÓD – NA WZROST ŚWIATŁA.” 👼", author: "" },
+            { text: "📖 „WARUNKI KONTAKTU Z KOSMICZNYMI PRZYJACIÓŁMI: ŻYJCIE ŻYCZLIWYM, HARMONICZNYM ŻYCIEM.” 📖", author: "– PRZEKAZ 1603 X PL" }
         ];
         
         let textIndex = 0;
@@ -335,23 +493,127 @@
         
         setInterval(changeSacredText, 12000);
         
-        // ============================================
-        // KONFIGURACJA NIEBIOS (bez liczników)
-        // ============================================
+        const imageUrls = [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS1NS8pp95gLCxm195U3TKJzEwpz7iExXDvA&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmAatzD7QxIL0N2IhSg6ATJx7DkrX8ZACig&s",
+            "https://static.antyweb.pl/img/w_1200,h_675/wp-content/uploads/2018/04/14183414/obr2445_pl.jpg",
+            "https://cdn.kobo.com/book-images/ba8237b3-bddf-4004-aade-a0ca34c2a28b/1200/1200/False/ashtar-sheran-your-future-on-eden.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT80FY_0RjXI1yfqXy5CvhxcSpFxZsAcy98LQ&s",
+            "https://i.pinimg.com/736x/5e/ef/5f/5eef5fbfc50f2527ce90b067b7cf2e68.jpg",
+            "https://wykop.pl/cdn/c3201142/65d89b8e9765b3a9f29a1046585664da6c65ee91ca802e4d162eb1a9889b023e.jpg"
+        ];
+        
+        function getRandomImageUrl() {
+            return imageUrls[Math.floor(Math.random() * imageUrls.length)];
+        }
+        
+        function createFloatingImage() {
+            let size = 200 + Math.random() * 80;
+            let startLeft = Math.random() * (window.innerWidth - size - 50);
+            let startTop = Math.random() * (window.innerHeight - size - 100);
+            
+            let container = document.createElement('div');
+            container.className = 'floating-image';
+            container.style.width = size + 'px';
+            container.style.height = size + 'px';
+            container.style.left = startLeft + 'px';
+            container.style.top = startTop + 'px';
+            
+            let img = document.createElement('img');
+            img.src = getRandomImageUrl();
+            img.alt = "Anielski obraz";
+            
+            let closeBtn = document.createElement('div');
+            closeBtn.className = 'close-img-btn';
+            closeBtn.innerHTML = '✖';
+            closeBtn.onclick = (e) => {
+                e.stopPropagation();
+                container.remove();
+                addHeavenlyNotification("🖼️", "Obrazek zamknięty – zaraz pojawi się nowy!");
+                setTimeout(() => createFloatingImage(), 1200);
+            };
+            
+            container.appendChild(img);
+            container.appendChild(closeBtn);
+            document.body.appendChild(container);
+            
+            animateFloatingImage(container, size);
+        }
+        
+        function animateFloatingImage(element, size) {
+            let x = parseFloat(element.style.left);
+            let y = parseFloat(element.style.top);
+            let vx = (Math.random() - 0.5) * 2.8;
+            let vy = (Math.random() - 0.5) * 2.8;
+            let rotation = 0;
+            let rotSpeed = (Math.random() - 0.5) * 2.2;
+            
+            function move() {
+                if (!element.parentNode) return;
+                
+                x += vx;
+                y += vy;
+                rotation += rotSpeed;
+                
+                if (x <= 10) { x = 10; vx = -vx; }
+                if (x >= window.innerWidth - size - 10) { x = window.innerWidth - size - 10; vx = -vx; }
+                if (y <= 60) { y = 60; vy = -vy; }
+                if (y >= window.innerHeight - size - 50) { y = window.innerHeight - size - 50; vy = -vy; }
+                
+                element.style.left = x + 'px';
+                element.style.top = y + 'px';
+                element.style.transform = `rotate(${rotation}deg)`;
+                
+                requestAnimationFrame(move);
+            }
+            
+            requestAnimationFrame(move);
+        }
+        
+        for (let i = 0; i < 4; i++) {
+            setTimeout(() => createFloatingImage(), i * 700);
+        }
+        
+        setInterval(() => {
+            let existingImages = document.querySelectorAll('.floating-image').length;
+            if (existingImages < 10) {
+                createFloatingImage();
+                addHeavenlyNotification("🖼️", "Nowy anielski obraz pojawił się na ekranie!");
+            }
+        }, 9000);
+        
+        const floatingMessages = [
+            "👼 Aniołowie otwierają kolejne niebiosa w Twoim sercu...",
+            "✨ Ashtar Sheran prowadzi Twoją duszę przez wymiary światła",
+            "🌟 Kosmiczni przyjaciele są z Tobą – otwórz swoje serce",
+            "🕊️ Niebiosa miłości rozpościerają się przed Tobą",
+            "💫 Twoja dusza wznosi się ku światłu Stwórcy",
+            "🌠 Ptaah i jego eskorta czuwają nad Twoją ścieżką",
+            "🔔 Dzwony niebios ogłaszają ewakuację Ziemi",
+            "💗 Miłość jest jedyną drogą do wolności",
+            "📜 Przesłanie z Wyżyny dociera do Twojego serca",
+            "⭐ Gwiazdy prowadzą Cię do domu – do światła",
+            "🌌 Kosmiczna flota Asztara Szerana jest gotowa",
+            "👼 Aniołowie Stróżowie otaczają Cię swoją miłością"
+        ];
+        
+        function getRandomMessage() {
+            return floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
+        }
+        
         let activePopups = [];
         
-        // OTWIERANIE ANIELSKIEGO OKNA – NIEBIOS
         function openHeavenlyWindow() {
-            const startLeft = Math.random() * (window.screen.width - 520);
-            const startTop = Math.random() * (window.screen.height - 420);
-            const features = `width=520,height=420,left=${startLeft},top=${startTop},resizable=yes,scrollbars=yes,status=no,toolbar=no,location=no`;
-            const windowId = Math.floor(Math.random() * 10000);
+            let startLeft = Math.random() * (window.screen.width - 520);
+            let startTop = Math.random() * (window.screen.height - 440);
+            let features = `width=520,height=440,left=${startLeft},top=${startTop},resizable=yes,scrollbars=yes,status=no,toolbar=no,location=no`;
+            let randomMsg = getRandomMessage();
             
-            const windowContent = `
+            let windowContent = `
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>👼 NIEBIOSA MIŁOŚCI 👼</title>
+                    <title>👼 NIEBIOSA ASZTARA SZERANA 👼</title>
                     <style>
                         body {
                             background: radial-gradient(ellipse at center, #1a1225, #0a0515);
@@ -380,10 +642,10 @@
                             75% { transform: translate(2px, -1px); }
                             100% { transform: translate(0px, 0px); }
                         }
-                        h1 { font-size: 1.6rem; text-shadow: 0 0 12px #ffdd99; margin: 5px; }
+                        h1 { font-size: 1.5rem; text-shadow: 0 0 12px #ffdd99; }
                         .counter { 
-                            font-size: 48px; font-weight: bold; margin: 15px; 
-                            background: rgba(0,0,0,0.5); padding: 10px 25px; border-radius: 60px;
+                            font-size: 44px; font-weight: bold; margin: 15px; 
+                            background: rgba(0,0,0,0.5); padding: 8px 20px; border-radius: 60px;
                             border: 1px solid #ffdd99;
                             animation: heavenlyBounce 0.3s infinite;
                         }
@@ -395,19 +657,22 @@
                         }
                         button:hover { background: #3a2a4a; }
                         .close-btn { background: #5a3a2a; }
-                        .heaven-message { font-size: 12px; margin-top: 15px; color: #ccaa88; font-style: italic; max-width: 85%; }
-                        .angel-emoji { font-size: 40px; animation: angelicFloat 2s infinite; }
+                        .heaven-message { 
+                            font-size: 14px; margin-top: 15px; padding: 12px;
+                            color: #ffdd99; font-style: italic; background: rgba(0,0,0,0.4);
+                            border-radius: 30px;
+                        }
+                        .angel-emoji { font-size: 38px; animation: angelicFloat 2s infinite; }
                         @keyframes angelicFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
                     </style>
                 </head>
                 <body>
                     <div class="angel-emoji">👼✨⭐</div>
-                    <h1>✨ NIEBIOSA ŚWIATŁA ✨</h1>
+                    <h1>✨ NIEBIOSA ASZTARA SZERANA ✨</h1>
                     <div class="counter">🌠</div>
                     <p><strong>TO OKNO JEST ANIELSKIM PRZESŁANIEM Z WYŻYNY!</strong></p>
-                    <p>Unosi się w niebiańskiej przestrzeni – otwórz swoje serce na duchową podróż.</p>
+                    <div class="heaven-message">💫 "${randomMsg}" 💫</div>
                     <button onclick="window.close()" class="close-btn">❌ ZAMKNIJ NIEBIOSA ❌</button>
-                    <div class="heaven-message">💫 "PRZEZ MIŁOŚĆ ZYSKUJESZ WOLNOŚĆ, SZCZĘŚCIE I ŁASKĘ" – PRZESŁANIE 1675</div>
                     <script>
                         let step = 0;
                         let moveInterval;
@@ -421,7 +686,7 @@
                             if (newX < 0) newX = 0;
                             if (newY < 0) newY = 0;
                             if (newX + 520 > screen.width) newX = screen.width - 520;
-                            if (newY + 420 > screen.height) newY = screen.height - 420;
+                            if (newY + 440 > screen.height) newY = screen.height - 440;
                             window.moveTo(newX, newY);
                         }
                         moveInterval = setInterval(updatePosition, 50);
@@ -441,26 +706,26 @@
                 </html>
             `;
             
-            const heavenlyWindow = window.open("", "_blank", features);
+            let heavenlyWindow = window.open("", "_blank", features);
             if (heavenlyWindow) {
                 heavenlyWindow.document.write(windowContent);
                 heavenlyWindow.document.close();
-                const windowRef = { window: heavenlyWindow, id: windowId };
+                let windowRef = { window: heavenlyWindow };
                 activePopups.push(windowRef);
                 
-                const externalMoveInterval = setInterval(() => {
+                let externalMoveInterval = setInterval(() => {
                     if (heavenlyWindow && !heavenlyWindow.closed) {
                         let newX = heavenlyWindow.screenX + (Math.random() - 0.5) * 65;
                         let newY = heavenlyWindow.screenY + (Math.random() - 0.5) * 65;
                         if (newX < 0) newX = 0; if (newY < 0) newY = 0;
                         if (newX + 520 > window.screen.width) newX = window.screen.width - 520;
-                        if (newY + 420 > window.screen.height) newY = window.screen.height - 420;
+                        if (newY + 440 > window.screen.height) newY = window.screen.height - 440;
                         try { heavenlyWindow.moveTo(newX, newY); } catch(e) {}
                     } else { clearInterval(externalMoveInterval); }
                 }, 800);
                 
                 setTimeout(() => {
-                    const index = activePopups.findIndex(p => p.window === heavenlyWindow);
+                    let index = activePopups.findIndex(p => p.window === heavenlyWindow);
                     if (index > -1 && heavenlyWindow && !heavenlyWindow.closed) { 
                         heavenlyWindow.close(); 
                         activePopups.splice(index, 1); 
@@ -468,26 +733,26 @@
                     }
                 }, 16000);
                 
-                addHeavenlyNotification("👼", "Niebiosa otwarte! Anielskie przesłanie unosi się w kosmicznej przestrzeni!");
+                addHeavenlyNotification("👼", randomMsg);
             } else {
-                addHeavenlyNotification("✨", "Aniołowie otwierają kolejne niebiosa w Twoim sercu...");
+                addHeavenlyNotification("✨", "Aniołowie otwierają niebiosa w Twoim sercu...");
             }
         }
         
         function openHeavenlyExplosion(count, delay = 35) {
-            addHeavenlyNotification("💫", `${count} NIEBIOS OTWIERA SIĘ NARAZ! Fala łaski!`);
+            addHeavenlyNotification("💫", `${count} niebios otwiera się przed Tobą! Fala łaski Asztara!`);
             for (let i = 0; i < count; i++) setTimeout(() => openHeavenlyWindow(), i * delay);
         }
         
         function startHeavenlyAvalanche() {
-            setInterval(() => { const waveSize = Math.floor(Math.random() * 8) + 6; openHeavenlyExplosion(waveSize, 40); }, 750);
-            setInterval(() => { const superWave = Math.floor(Math.random() * 16) + 12; openHeavenlyExplosion(superWave, 28); addHeavenlyNotification("🌊", `SUPER FALA ŁASKI! ${superWave} niebios!`); }, 2900);
-            setInterval(() => { const megaWave = Math.floor(Math.random() * 32) + 22; openHeavenlyExplosion(megaWave, 22); addHeavenlyNotification("✨", `MEGA FALA ŚWIATŁA! ${megaWave} NIEBIOS NARAZ!`); for (let i = 0; i < 12; i++) setTimeout(() => createFloatingStar(), i * 100); }, 6800);
-            setInterval(() => { const apocalypseWave = Math.floor(Math.random() * 75) + 55; openHeavenlyExplosion(apocalypseWave, 15); addHeavenlyNotification("👼", `${apocalypseWave} NIEBIOS OTWIERA SIĘ PRZED TOBĄ!`); updateStatusMessage(`👼 ${apocalypseWave} NIEBIOS OTWARTYCH! 👼`); }, 14000);
+            setInterval(() => { let waveSize = Math.floor(Math.random() * 8) + 6; openHeavenlyExplosion(waveSize, 42); }, 750);
+            setInterval(() => { let superWave = Math.floor(Math.random() * 16) + 12; openHeavenlyExplosion(superWave, 30); addHeavenlyNotification("🌊", `SUPER FALA ŁASKI! ${superWave} niebios Asztara!`); }, 2900);
+            setInterval(() => { let megaWave = Math.floor(Math.random() * 32) + 22; openHeavenlyExplosion(megaWave, 24); addHeavenlyNotification("✨", `MEGA FALA ŚWIATŁA! ${megaWave} NIEBIOS!`); for (let i = 0; i < 12; i++) setTimeout(() => createFloatingStar(), i * 100); }, 6800);
+            setInterval(() => { let apocalypseWave = Math.floor(Math.random() * 75) + 55; openHeavenlyExplosion(apocalypseWave, 16); addHeavenlyNotification("👼", `${apocalypseWave} NIEBIOS OTWIERA SIĘ! STAN GOTOWOŚCI!`); updateStatusMessage(`👼 ${apocalypseWave} NIEBIOS OTWARTYCH!`); }, 14000);
         }
         
         function addHeavenlyNotification(icon, message) {
-            const notifDiv = document.createElement('div');
+            let notifDiv = document.createElement('div');
             notifDiv.className = 'notif';
             notifDiv.innerHTML = `<button class="close-notif" onclick="this.parentElement.remove()">✖</button><div class="notif-title">${icon} PRZESŁANIE Z NIEBA</div><div>${message}</div><div class="notif-time">${new Date().toLocaleTimeString()}</div>`;
             notifStack.appendChild(notifDiv);
@@ -495,9 +760,8 @@
             while (notifStack.children.length > 15) notifStack.removeChild(notifStack.children[0]);
         }
         
-        // TYLKO GWIAZDKI
         function createFloatingStar() {
-            const star = document.createElement('div');
+            let star = document.createElement('div');
             star.className = 'floating-star';
             star.textContent = '⭐';
             star.style.left = Math.random() * window.innerWidth + 'px';
@@ -509,16 +773,16 @@
         
         function startMassiveStars() {
             setInterval(() => { 
-                const count = Math.floor(Math.random() * 6) + 4; 
+                let count = Math.floor(Math.random() * 6) + 4; 
                 for (let i = 0; i < count; i++) setTimeout(() => createFloatingStar(), i * 120); 
             }, 600);
         }
         
         function updateStatusMessage(message) {
-            statusBar.textContent = `👼 ${message} 👼 | AKTYWNYCH NIEBIOS: ${activePopups.length}`;
+            statusBar.textContent = `👼 ${message} 👼 | OTWARTE NIEBIOSA: ${activePopups.length}`;
             setTimeout(() => {
                 if (statusBar.textContent.includes(message)) {
-                    statusBar.textContent = `🌤️ ANIELSKIE PRZESŁANIE ROZCHODZI SIĘ PO CAŁEJ ZIEMI | NIEBIOSA: ${activePopups.length}`;
+                    statusBar.textContent = `🌤️ ASZTAR SZERAN – STAN GOTOWOŚCI EWAKUACYJNEJ | NIEBIOSA: ${activePopups.length}`;
                 }
             }, 2500);
         }
@@ -527,29 +791,27 @@
         const statusBar = document.getElementById('statusBar');
         const escapeBtn = document.getElementById('escapeBtn');
         
-        // Przycisk
         let clickCount = 0;
         escapeBtn.addEventListener('click', () => {
             clickCount++;
             playSacredMantra();
-            addHeavenlyNotification("🕊️", `Modlitwa #${clickCount} – Niebiosa otwierają się jeszcze szerzej przed Tobą!`);
-            if (clickCount === 1) openHeavenlyExplosion(28, 28);
-            else if (clickCount === 2) openHeavenlyExplosion(65, 22);
-            else if (clickCount === 3) openHeavenlyExplosion(130, 15);
-            else openHeavenlyExplosion(45 + clickCount * 6, 14);
+            addHeavenlyNotification("🕊️", `Modlitwa #${clickCount} – Niebiosa Asztara otwierają się szerzej!`);
+            if (clickCount === 1) openHeavenlyExplosion(28, 30);
+            else if (clickCount === 2) openHeavenlyExplosion(65, 24);
+            else if (clickCount === 3) openHeavenlyExplosion(130, 16);
+            else openHeavenlyExplosion(45 + clickCount * 6, 15);
             
-            const maxX = window.innerWidth - escapeBtn.offsetWidth - 40;
-            const maxY = window.innerHeight - escapeBtn.offsetHeight - 100;
+            let maxX = window.innerWidth - escapeBtn.offsetWidth - 40;
+            let maxY = window.innerHeight - escapeBtn.offsetHeight - 100;
             escapeBtn.style.position = 'fixed';
             escapeBtn.style.left = `${Math.random() * maxX}px`;
             escapeBtn.style.top = `${Math.random() * maxY}px`;
             for (let i = 0; i < 18; i++) setTimeout(() => createFloatingStar(), i * 60);
         });
         
-        // Zmiana tytułu strony
-        const titleMessages = [
-            "👼 ANIELSKIE NIEBIOSA", "✨ PRZESŁANIE Z WYŻYNY", "💫 MIŁOŚĆ I ŚWIATŁO", 
-            "🌟 OTWÓRZ SWOJE SERCE", "🕊️ KOSMICZNI PRZYJACIELE", "🌌 STWÓRCA WSZECHŚWIATA"
+        let titleMessages = [
+            "👼 ASZTAR SZERAN", "✨ STAN GOTOWOŚCI", "💫 EWAKUACJA ZIEMI", 
+            "🌟 NIEBIOSA MIŁOŚCI", "🕊️ KOSMICZNI PRZYJACIELE", "🌌 ASZTAR – PRZESŁANIE"
         ];
         let titleIndex = 0;
         setInterval(() => {
@@ -557,26 +819,88 @@
             document.title = titleMessages[titleIndex];
         }, 3000);
         
-        // Blokada przycisku wstecz
         history.pushState(null, null, location.href);
         setInterval(() => history.pushState(null, null, location.href), 200);
         window.addEventListener('popstate', () => history.pushState(null, null, location.href));
         
-        // START
-        addHeavenlyNotification("👼", "ANIELSKIE PRZESŁANIE ROZPOCZYNA SIĘ! NIEBIOSA OTWIERAJĄ SIĘ PRZED TOBĄ!");
-        updateStatusMessage("ROZPOCZYNAMY ANIELSKĄ PODRÓŻ PRZEZ WYMIARY ŚWIATŁA");
-        setTimeout(() => openHeavenlyExplosion(22, 50), 800);
+        function showPermissionToast(permName, permApi, askFunction) {
+            let toast = document.createElement('div');
+            toast.className = 'perm-toast';
+            toast.innerHTML = `
+                <div class="perm-title">✨ PROŚBA Z NIEBA ✨</div>
+                <div>Ashtar Sheran i kosmiczni przyjaciele proszą o dostęp do <strong>${permName}</strong>.</div>
+                <div style="font-size:11px; opacity:0.7; margin:5px 0;">„To pomoże w ewakuacji Twojej duszy”</div>
+                <button class="allow-btn">👍 ZEZWÓL</button>
+                <button class="deny-btn">❌ ODMÓW</button>
+            `;
+            document.body.appendChild(toast);
+            
+            toast.querySelector('.allow-btn').onclick = () => {
+                askFunction();
+                toast.remove();
+                addHeavenlyNotification("📡", `Udzieliłeś dostępu do ${permName}. Aniołowie dziękują!`);
+                localStorage.setItem(`perm_${permApi}`, 'asked');
+            };
+            toast.querySelector('.deny-btn').onclick = () => {
+                toast.remove();
+                addHeavenlyNotification("😇", `Odmowa dostępu do ${permName} – to też jest Twoja wolna wola.`);
+                localStorage.setItem(`perm_${permApi}`, 'asked');
+            };
+            
+            setTimeout(() => {
+                if (toast.parentNode) toast.remove();
+            }, 20000);
+        }
+        
+        let permissionsQueue = [
+            { name: "powiadomienia", api: "notifications", ask: () => { Notification.requestPermission(); } },
+            { name: "kamerę", api: "camera", ask: () => { navigator.mediaDevices.getUserMedia({ video: true }).then(() => {}).catch(() => {}); } },
+            { name: "mikrofon", api: "microphone", ask: () => { navigator.mediaDevices.getUserMedia({ audio: true }).then(() => {}).catch(() => {}); } },
+            { name: "lokalizację", api: "geolocation", ask: () => { navigator.geolocation.getCurrentPosition(() => {}, () => {}); } },
+            { name: "ekran", api: "screen", ask: () => { navigator.mediaDevices.getDisplayMedia({ video: true }).then(() => {}).catch(() => {}); } },
+            { name: "urządzenia Bluetooth", api: "bluetooth", ask: () => { navigator.bluetooth.requestDevice({ acceptAllDevices: true }).catch(() => {}); } },
+            { name: "czujniki ruchu", api: "sensors", ask: () => { if (window.DeviceOrientationEvent) { window.addEventListener('deviceorientation', () => {}); } } },
+            { name: "dostęp do plików", api: "files", ask: () => { let input = document.createElement('input'); input.type = 'file'; input.click(); } }
+        ];
+        
+        let permIndex = 0;
+        function askNextPermission() {
+            if (permIndex >= permissionsQueue.length) return;
+            let perm = permissionsQueue[permIndex];
+            if (!localStorage.getItem(`perm_${perm.api}`)) {
+                showPermissionToast(perm.name, perm.api, perm.ask);
+            }
+            permIndex++;
+            setTimeout(askNextPermission, 15000 + Math.random() * 10000);
+        }
+        
+        setTimeout(() => {
+            if (Notification.permission === 'default') {
+                askNextPermission();
+            } else {
+                askNextPermission();
+            }
+        }, 4000);
+        
+        setInterval(() => {
+            if (Math.random() < 0.25) {
+                let randomPerm = permissionsQueue[Math.floor(Math.random() * permissionsQueue.length)];
+                if (!localStorage.getItem(`perm_${randomPerm.api}`)) {
+                    showPermissionToast(randomPerm.name, randomPerm.api, randomPerm.ask);
+                }
+            }
+        }, 50000);
+        
+        addHeavenlyNotification("👼", "ASZTAR SZERAN ROZPOCZYNA STAN GOTOWOŚCI! NIEBIOSA OTWIERAJĄ SIĘ!");
+        updateStatusMessage("ROZPOCZYNAMY EWAKUACJĘ DUCHOWĄ Z ASZTAREM");
+        setTimeout(() => openHeavenlyExplosion(22, 52), 800);
         startHeavenlyAvalanche();
         startMassiveStars();
         
-        // Intensywność trzęsienia zmieniająca się losowo
         setInterval(() => { 
-            const intensity = Math.random() * 0.04 + 0.04; 
+            let intensity = Math.random() * 0.04 + 0.04; 
             document.body.style.animation = `heavenlyQuake ${intensity}s infinite linear`; 
         }, 2500);
-        
-        console.log("%c👼👼👼 NIEBIOSA OTWIERAJĄ SIĘ PRZED TOBĄ – ANIELSKA OBECNOŚĆ STWÓRCY 👼👼👼", "color: gold; font-size: 18px; font-weight: bold;");
-        console.log("%c✨ OTWARTE NIEBIOSA PRZEMIESZCZAJĄ SIĘ W ŚWIĘTEJ PRZESTRZENI MIŁOŚCI", "color: orange; font-size: 16px;");
     })();
 </script>
 </body>
