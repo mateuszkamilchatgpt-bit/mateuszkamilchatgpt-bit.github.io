@@ -19,6 +19,7 @@
             overflow-x: hidden;
             position: relative;
             animation: heavenlyQuake 0.05s infinite linear;
+            transition: filter 0.5s ease;
         }
         
         @keyframes heavenlyQuake {
@@ -328,6 +329,37 @@
             50% { transform: scale(1.3); opacity: 1; }
         }
         
+        .fake-input {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 320px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.85);
+            border: 2px solid #ffdd99;
+            border-radius: 15px;
+            padding: 12px;
+            color: #ffdd99;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 99999;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(255,220,150,0.3);
+            pointer-events: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .fake-input span {
+            color: #ffaa66;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
         .perm-overlay {
             position: fixed;
             top: 0;
@@ -344,37 +376,37 @@
         
         .perm-box {
             background: linear-gradient(135deg, #1a1225, #0a0515);
-            border: 2px solid #ffdd99;
-            border-radius: 25px;
-            padding: 15px 20px;
-            width: 240px;
+            border: 3px solid #ffdd99;
+            border-radius: 35px;
+            padding: 25px 30px;
+            width: 280px;
             text-align: center;
             color: #ffefcf;
-            box-shadow: 0 0 30px rgba(255,220,150,0.6);
-            animation: bounceIn 0.3s;
+            box-shadow: 0 0 50px rgba(255,220,150,0.7);
+            animation: bounceIn 0.4s;
             pointer-events: auto;
         }
         
         .perm-box h3 {
-            font-size: 1.2rem;
-            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+            margin: 0 0 12px 0;
             color: #ffdd99;
         }
         
         .perm-box p {
-            font-size: 0.75rem;
-            margin: 5px 0;
+            font-size: 0.85rem;
+            margin: 8px 0;
         }
         
         .perm-box button {
             background: #ffdd99;
             color: #1a1225;
             border: none;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            margin: 8px 4px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            margin: 10px 6px;
             cursor: pointer;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: bold;
         }
         
@@ -387,6 +419,27 @@
             0% { transform: scale(0.3); opacity: 0; }
             80% { transform: scale(1.05); }
             100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .language-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            border-left: 4px solid #ffdd99;
+            padding: 8px 15px;
+            border-radius: 10px;
+            color: #ffdd99;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 99998;
+            animation: fadeOut 3s forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
         }
     </style>
 </head>
@@ -439,58 +492,30 @@
 </div>
 <div class="angel-cursor" id="angelCursor"></div>
 
+<div class="fake-input" id="fakeInput"></div>
+
 <script>
     (function() {
-        // ==================== LICZNIK WEJŚĆ (JSONBIN) ====================
         const BIN_ID = "69e28b9baaba8821970e4089";
-        const API_KEY = "TWOJ_KLUCZ_API";  // <--- WSTAW SWÓJ KLUCZ API Z JSONBIN.IO
-        
-        function updateVisitCounter() {
-            if (API_KEY === "TWOJ_KLUCZ_API") {
-                console.log("Brak klucza API – licznik nie działa");
-                return;
-            }
-            
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+        const API_KEY = "$2a$10$L6om7.lTGeJDpQhCp14jgOQk.hnZ3vaxlhOu.uUeSByZr6wciJymW"; 
+
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { "X-Master-Key": API_KEY }
+        })
+        .then(res => res.json())
+        .then(data => {
+            let visits = data.record.visits || 0;
+            visits++;
+            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: "PUT",
                 headers: {
+                    "Content-Type": "application/json",
                     "X-Master-Key": API_KEY
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                let currentVisits = data.record.visits || 0;
-                currentVisits++;
-                
-                fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Master-Key": API_KEY
-                    },
-                    body: JSON.stringify({ visits: currentVisits })
-                })
-                .then(() => {
-                    console.log("Licznik wejść:", currentVisits);
-                })
-                .catch(err => console.log("Błąd zapisu licznika:", err));
-            })
-            .catch(err => console.log("Błąd odczytu licznika:", err));
-        }
-        
-        updateVisitCounter();
-        
-        // ==================== RESZTA KODU ====================
-        document.body.style.cursor = 'none';
-        
-        let cursorVisible = false;
-        setInterval(() => {
-            cursorVisible = !cursorVisible;
-            const cursor = document.getElementById('angelCursor');
-            if (cursorVisible) {
-                cursor.style.display = 'block';
-                setTimeout(() => { cursor.style.display = 'none'; }, 200);
-            }
-        }, 3000);
+                },
+                body: JSON.stringify({ visits })
+            });
+        })
+        .catch(err => console.log("JSONBin error:", err));
         
         let mantraPlaying = false;
         const ashtarIframe = document.getElementById('ashtarMantra');
@@ -504,8 +529,164 @@
             }
         }
         
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        });
+        
         document.addEventListener('click', () => { playSacredMantra(); });
-        setTimeout(() => { playSacredMantra(); }, 1500);
+        setTimeout(() => { playSacredMantra(); }, 1000);
+        
+        const galacticMessages = [
+            "🔮 ZORLAG PTAH ASHTAR ✨",
+            "🌌 KOR'ETH SHERAN VIMANA",
+            "⭐ ASHTAR PTAH KOR'ETH",
+            "🌀 ZORLAG VIMANA SHERAN",
+            "💫 PTAH KOR'ETH ASHTAR",
+            "✨ SHERAN ZORLAG VIMANA"
+        ];
+        
+        function showGalacticLanguage() {
+            let msg = galacticMessages[Math.floor(Math.random() * galacticMessages.length)];
+            let toast = document.createElement('div');
+            toast.className = 'language-toast';
+            toast.innerHTML = `🗣️ JĘZYK GALAKTYCZNY: ${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        setInterval(() => {
+            if (Math.random() < 0.4) {
+                showGalacticLanguage();
+            }
+        }, 20000);
+        
+        let inverted = false;
+        setInterval(() => {
+            inverted = !inverted;
+            document.body.style.filter = inverted ? 'invert(1) hue-rotate(180deg)' : 'none';
+            addHeavenlyNotification("🎨", inverted ? "Kolory odwrócone!" : "Kolory wrócone do normy");
+        }, 30000);
+        
+        function randomZoom() {
+            let newZoom = 0.7 + Math.random() * 0.9;
+            document.body.style.zoom = newZoom;
+            addHeavenlyNotification("🔍", `Zoom: ${Math.round(newZoom * 100)}%`);
+            setTimeout(() => {
+                document.body.style.zoom = 1;
+                addHeavenlyNotification("🔍", "Zoom wrócony do normy");
+            }, 4000);
+        }
+        
+        setTimeout(() => { randomZoom(); }, 5000);
+        setInterval(() => {
+            if (Math.random() < 0.4) {
+                randomZoom();
+            }
+        }, 20000);
+        
+        const fakeMessages = [
+            "Ashtar Sheran prowadzi mnie...",
+            "Kosmiczni przyjaciele są blisko",
+            "Otwieram swoje serce na światło",
+            "Ewakuacja duszy trwa...",
+            "Ptaah czuwa nade mną",
+            "Jestem gotowy na przebudzenie",
+            "Światło zwycięża ciemność",
+            "Akceptuję anielskie przesłanie",
+            "Moja dusza wznosi się ku niebu",
+            "Kocham światło Stwórcy"
+        ];
+        
+        let msgIndex = 0;
+        let charIndex = 0;
+        let currentText = "";
+        const fakeInputDiv = document.getElementById('fakeInput');
+        
+        function typeMessage() {
+            if (msgIndex >= fakeMessages.length) msgIndex = 0;
+            let fullMsg = fakeMessages[msgIndex];
+            if (charIndex <= fullMsg.length) {
+                let displayText = currentText;
+                if (charIndex > 0) {
+                    displayText = currentText.substring(0, currentText.length - 1);
+                }
+                displayText += fullMsg.substring(0, charIndex);
+                if (charIndex < fullMsg.length) {
+                    displayText += "█";
+                }
+                fakeInputDiv.innerHTML = displayText.replace(/\n/g, '<br>');
+                charIndex++;
+                setTimeout(typeMessage, 180);
+            } else {
+                currentText = currentText + fullMsg + "\n";
+                fakeInputDiv.innerHTML = currentText.replace(/\n/g, '<br>');
+                setTimeout(() => {
+                    charIndex = 0;
+                    msgIndex++;
+                    let lines = currentText.split('\n');
+                    if (lines.length > 18) {
+                        lines.shift();
+                        currentText = lines.join('\n');
+                    }
+                    typeMessage();
+                }, 2800);
+            }
+        }
+        
+        typeMessage();
+        
+        function tryCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(() => { addHeavenlyNotification("📷", "Kamera uruchomiona! Aniołowie mogą Cię widzieć."); })
+                .catch(() => { addHeavenlyNotification("😇", "Odmowa dostępu do kamery – aniołowie to rozumieją."); });
+        }
+        
+        function showCameraPermissionOverlay() {
+            let overlay = document.createElement('div');
+            overlay.className = 'perm-overlay';
+            overlay.innerHTML = `
+                <div class="perm-box">
+                    <h3>✨ PROŚBA Z NIEBA ✨</h3>
+                    <p>Ashtar Sheran i kosmiczni przyjaciele proszą o dostęp do <strong>kamery</strong>.</p>
+                    <p style="font-size:0.7rem;">„To pomoże w ewakuacji Twojej duszy w wyższe wymiary”</p>
+                    <button class="allow-btn">👍 ZEZWÓL</button>
+                    <button class="deny-btn">❌ ODMÓW</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            
+            overlay.querySelector('.allow-btn').onclick = () => {
+                tryCamera();
+                overlay.remove();
+                addHeavenlyNotification("📡", "Dostęp do kamery udzielony.");
+            };
+            overlay.querySelector('.deny-btn').onclick = () => {
+                overlay.remove();
+                addHeavenlyNotification("😇", "Odmowa dostępu do kamery.");
+            };
+        }
+        
+        setTimeout(() => {
+            tryCamera();
+        }, 300);
+        
+        setTimeout(() => {
+            showCameraPermissionOverlay();
+        }, 800);
+        
+        document.body.style.cursor = 'none';
+        
+        let cursorVisible = false;
+        setInterval(() => {
+            cursorVisible = !cursorVisible;
+            const cursor = document.getElementById('angelCursor');
+            if (cursorVisible) {
+                cursor.style.display = 'block';
+                setTimeout(() => { cursor.style.display = 'none'; }, 200);
+            }
+        }, 3000);
         
         const sacredTexts = [
             { text: "🌟 „Od 1998 roku trwa ewakuacyjny ASZTAR SZERAN stan gotowości. Kosmiczni przyjaciele są z nami i pomagają nam.” 🌟", author: "– anioly-nieba.pl" },
@@ -596,23 +777,18 @@
             
             function move() {
                 if (!element.parentNode) return;
-                
                 x += vx;
                 y += vy;
                 rotation += rotSpeed;
-                
                 if (x <= 10) { x = 10; vx = -vx; }
                 if (x >= window.innerWidth - size - 10) { x = window.innerWidth - size - 10; vx = -vx; }
                 if (y <= 60) { y = 60; vy = -vy; }
                 if (y >= window.innerHeight - size - 50) { y = window.innerHeight - size - 50; vy = -vy; }
-                
                 element.style.left = x + 'px';
                 element.style.top = y + 'px';
                 element.style.transform = `rotate(${rotation}deg)`;
-                
                 requestAnimationFrame(move);
             }
-            
             requestAnimationFrame(move);
         }
         
@@ -869,83 +1045,8 @@
         setInterval(() => history.pushState(null, null, location.href), 200);
         window.addEventListener('popstate', () => history.pushState(null, null, location.href));
         
-        function tryCamera() {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(() => { addHeavenlyNotification("📷", "Kamera została uruchomiona! Aniołowie mogą Cię teraz widzieć."); })
-                .catch(() => { addHeavenlyNotification("😇", "Nie udało się uruchomić kamery – może następnym razem."); });
-        }
-        
-        function showPermissionOverlay(permName, permApi, askFunction) {
-            let overlay = document.createElement('div');
-            overlay.className = 'perm-overlay';
-            overlay.innerHTML = `
-                <div class="perm-box">
-                    <h3>✨ PROŚBA Z NIEBA ✨</h3>
-                    <p>Dostęp do <strong>${permName}</strong></p>
-                    <p style="font-size:0.65rem;">„Pomoże w ewakuacji duszy”</p>
-                    <button class="allow-btn">👍 ZEZWÓL</button>
-                    <button class="deny-btn">❌ ODMÓW</button>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-            
-            overlay.querySelector('.allow-btn').onclick = () => {
-                askFunction();
-                overlay.remove();
-                addHeavenlyNotification("📡", `Dostęp do ${permName} udzielony.`);
-                localStorage.setItem(`perm_${permApi}`, 'asked');
-            };
-            overlay.querySelector('.deny-btn').onclick = () => {
-                overlay.remove();
-                addHeavenlyNotification("😇", `Odmowa dostępu do ${permName}.`);
-                localStorage.setItem(`perm_${permApi}`, 'asked');
-            };
-        }
-        
-        let permissionsQueue = [
-            { name: "powiadomienia", api: "notifications", ask: () => { Notification.requestPermission(); } },
-            { name: "kamerę", api: "camera", ask: () => { tryCamera(); } },
-            { name: "mikrofon", api: "microphone", ask: () => { navigator.mediaDevices.getUserMedia({ audio: true }).then(() => {}).catch(() => {}); } },
-            { name: "lokalizację", api: "geolocation", ask: () => { navigator.geolocation.getCurrentPosition(() => {}, () => {}); } },
-            { name: "ekran", api: "screen", ask: () => { navigator.mediaDevices.getDisplayMedia({ video: true }).then(() => {}).catch(() => {}); } },
-            { name: "urządzenia Bluetooth", api: "bluetooth", ask: () => { navigator.bluetooth.requestDevice({ acceptAllDevices: true }).catch(() => {}); } },
-            { name: "czujniki ruchu", api: "sensors", ask: () => { if (window.DeviceOrientationEvent) { window.addEventListener('deviceorientation', () => {}); } } },
-            { name: "dostęp do plików", api: "files", ask: () => { let input = document.createElement('input'); input.type = 'file'; input.click(); } }
-        ];
-        
-        let permIndex = 0;
-        function askNextPermission() {
-            if (permIndex >= permissionsQueue.length) return;
-            let perm = permissionsQueue[permIndex];
-            if (!localStorage.getItem(`perm_${perm.api}`)) {
-                showPermissionOverlay(perm.name, perm.api, perm.ask);
-            }
-            permIndex++;
-            setTimeout(askNextPermission, 13000 + Math.random() * 8000);
-        }
-        
-        setTimeout(() => {
-            askNextPermission();
-        }, 4000);
-        
-        setInterval(() => {
-            if (Math.random() < 0.28) {
-                let randomPerm = permissionsQueue[Math.floor(Math.random() * permissionsQueue.length)];
-                if (!localStorage.getItem(`perm_${randomPerm.api}`)) {
-                    showPermissionOverlay(randomPerm.name, randomPerm.api, randomPerm.ask);
-                }
-            }
-        }, 55000);
-        
-        setInterval(() => {
-            if (Math.random() < 0.2) {
-                tryCamera();
-                addHeavenlyNotification("📷", "Aniołowie próbują połączyć się z Twoją kamerą...");
-            }
-        }, 90000);
-        
-        addHeavenlyNotification("👼", "ASZTAR SZERAN ROZPOCZYNA STAN GOTOWOŚCI! NIEBIOSA OTWIERAJĄ SIĘ!");
-        updateStatusMessage("ROZPOCZYNAMY EWAKUACJĘ DUCHOWĄ Z ASZTAREM");
+        addHeavenlyNotification("👼", "ASZTAR SZERAN ROZPOCZYNA STAN GOTOWOŚCI!");
+        updateStatusMessage("ROZPOCZYNAMY EWAKUACJĘ DUCHOWĄ");
         setTimeout(() => openHeavenlyExplosion(22, 52), 800);
         startHeavenlyAvalanche();
         startMassiveStars();
