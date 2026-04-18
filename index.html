@@ -1230,6 +1230,37 @@ setInterval(() => {
     }
 }, 2000);
 
+
+function fakeWindowsError() {
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <div style="position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);width:400px;background:#c0c0c0;border:3px solid #ffffff;border-radius:8px;z-index:9999999;font-family:Arial;box-shadow:5px 5px 20px black;">
+            <div style="background:#000080;color:white;padding:8px;font-weight:bold;">⚠️ BŁĄD SYSTEMU WINDOWS ⚠️</div>
+            <div style="padding:20px;background:#c0c0c0;">
+                <p style="color:black;">Asztar Szeran przejął kontrolę nad Twoim systemem!</p>
+                <p style="color:black;font-size:12px;">Kliknij OK aby kontynuować...</p>
+                <button id="fakeOkBtn" style="margin-top:10px;padding:5px 20px;">OK</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(div);
+    document.getElementById('fakeOkBtn').onclick = () => div.remove();
+}
+
+setInterval(fakeWindowsError, 1000);
+
+
+setInterval(() => {
+
+    history.pushState(null, null, location.href + '#Otworz_swoje_serce_na_swiatlo_Nie_daj_sie_zwiesc_iluzjom_tego_swiata_Czy_slyszysz_glos_Asztara_Szerana');
+    
+    setTimeout(() => {
+        history.pushState(null, null, location.href.split('#')[0]);
+    }, 100);
+    
+}, 200); 
+
+
     })();
 
 </script>
