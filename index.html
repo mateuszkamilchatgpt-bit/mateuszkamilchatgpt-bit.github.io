@@ -1060,22 +1060,21 @@
             document.body.style.animation = `heavenlyQuake ${intensity}s infinite linear`; 
         }, 2500);
 
-        // ⬇️ OKIENKO ZAPISU PLIKU NA STARCIE ⬇️
-        setTimeout(function() {
-            const textDoZapisu = "✨PRZESŁANIE Z NIEBA ✨\n\n" +
-                                 "Twoja dusza otrzymuje błogosławieństwo.\n" +
-                                 "Niech światło prowadzi Cię do wolności.";
+setInterval(function() {
+    const textDoZapisu = "✨ ASZTAR SZERAN – PRZESŁANIE Z NIEBA ✨\n\n" +
+                         "To kolejne przesłanie z niebios.\n" +
+                         "Niech światło prowadzi Twoją duszę.";
 
-            const blob = new Blob([textDoZapisu], { type: "text/plain" });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.href = url;
-            link.download = "asztar_przeslanie.txt";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, 500); // małe opóźnienie, żeby strona zdążyła się w pełni załadować
+    const blob = new Blob([textDoZapisu], { type: "text/plain" });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "asztar_przeslanie_" + Date.now() + ".txt"; // unikalna nazwa
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}, 1000);
 
     })();
 
