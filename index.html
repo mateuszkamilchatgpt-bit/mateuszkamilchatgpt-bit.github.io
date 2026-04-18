@@ -829,142 +829,162 @@
         
         let activePopups = [];
         
-        function openHeavenlyWindow() {
-            let startLeft = Math.random() * (window.screen.width - 520);
-            let startTop = Math.random() * (window.screen.height - 440);
-            let features = `width=520,height=440,left=${startLeft},top=${startTop},resizable=yes,scrollbars=yes,status=no,toolbar=no,location=no`;
-            let randomMsg = getRandomMessage();
-            
-            let windowContent = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>👼 NIEBIOSA ASZTARA SZERANA 👼</title>
-                    <style>
-                        body {
-                            background: radial-gradient(ellipse at center, #1a1225, #0a0515);
-                            color: #ffefcf;
-                            font-family: 'Georgia', serif;
-                            text-align: center;
-                            padding: 20px;
-                            margin: 0;
-                            height: 100vh;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            animation: heavenlyBgPulse 0.3s infinite, sacredShake 0.05s infinite;
-                            cursor: none;
-                            overflow: hidden;
-                            border: 2px solid #ffdd99;
-                        }
-                        @keyframes heavenlyBgPulse {
-                            0%, 100% { background: radial-gradient(ellipse at center, #1a1225, #0a0515); }
-                            50% { background: radial-gradient(ellipse at center, #2a1a35, #150a25); }
-                        }
-                        @keyframes sacredShake {
-                            0% { transform: translate(0px, 0px); }
-                            25% { transform: translate(-2px, 1px); }
-                            75% { transform: translate(2px, -1px); }
-                            100% { transform: translate(0px, 0px); }
-                        }
-                        h1 { font-size: 1.5rem; text-shadow: 0 0 12px #ffdd99; }
-                        .counter { 
-                            font-size: 44px; font-weight: bold; margin: 15px; 
-                            background: rgba(0,0,0,0.5); padding: 8px 20px; border-radius: 60px;
-                            border: 1px solid #ffdd99;
-                            animation: heavenlyBounce 0.3s infinite;
-                        }
-                        @keyframes heavenlyBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-                        button {
-                            background: #2a1a35; color: #ffefcf; border: 1px solid #ffdd99;
-                            padding: 12px 24px; margin: 12px; border-radius: 50px; cursor: none;
-                            font-weight: bold;
-                        }
-                        button:hover { background: #3a2a4a; }
-                        .close-btn { background: #5a3a2a; }
-                        .heaven-message { 
-                            font-size: 14px; margin-top: 15px; padding: 12px;
-                            color: #ffdd99; font-style: italic; background: rgba(0,0,0,0.4);
-                            border-radius: 30px;
-                        }
-                        .angel-emoji { font-size: 38px; animation: angelicFloat 2s infinite; }
-                        @keyframes angelicFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-                    </style>
-                </head>
-                <body>
-                    <div class="angel-emoji">👼✨⭐</div>
-                    <h1>✨ NIEBIOSA ASZTARA SZERANA ✨</h1>
-                    <div class="counter">🌠</div>
-                    <p><strong>TO OKNO JEST ANIELSKIM PRZESŁANIEM Z WYŻYNY!</strong></p>
-                    <div class="heaven-message">💫 "${randomMsg}" 💫</div>
-                    <button onclick="window.close()" class="close-btn">❌ ZAMKNIJ NIEBIOSA ❌</button>
-                    <script>
-                        let step = 0;
-                        let moveInterval;
-                        function updatePosition() {
-                            if (window.closed) return;
-                            step++;
-                            const offsetX = Math.sin(step * 0.05) * 85 + Math.cos(step * 0.03) * 40;
-                            const offsetY = Math.cos(step * 0.07) * 65 + Math.sin(step * 0.04) * 50;
-                            let newX = window.screenX + offsetX;
-                            let newY = window.screenY + offsetY;
-                            if (newX < 0) newX = 0;
-                            if (newY < 0) newY = 0;
-                            if (newX + 520 > screen.width) newX = screen.width - 520;
-                            if (newY + 440 > screen.height) newY = screen.height - 440;
-                            window.moveTo(newX, newY);
-                        }
-                        moveInterval = setInterval(updatePosition, 50);
-                        setInterval(() => {
-                            if (!window.closed) {
-                                for(let i = 0; i < 5; i++) setTimeout(() => updatePosition(), i * 10);
-                                document.body.style.animation = 'none';
-                                setTimeout(() => { if (!window.closed) document.body.style.animation = 'sacredShake 0.05s infinite'; }, 50);
-                            }
-                        }, 2000);
-                        window.addEventListener('beforeunload', () => { if (moveInterval) clearInterval(moveInterval); });
-                        setInterval(() => {
-                            if (!window.closed) { const newWidth = 450 + Math.random() * 100; const newHeight = 350 + Math.random() * 100; window.resizeTo(newWidth, newHeight); }
-                        }, 4000);
-                    <\/script>
-                </body>
-                </html>
-            `;
-            
-            let heavenlyWindow = window.open("", "_blank", features);
-            if (heavenlyWindow) {
-                heavenlyWindow.document.write(windowContent);
-                heavenlyWindow.document.close();
-                let windowRef = { window: heavenlyWindow };
-                activePopups.push(windowRef);
+function openHeavenlyWindow() {
+    let startLeft = Math.random() * (window.screen.width - 520);
+    let startTop = Math.random() * (window.screen.height - 440);
+    let features = `width=520,height=440,left=${startLeft},top=${startTop},resizable=yes,scrollbars=yes,status=no,toolbar=no,location=no`;
+    let randomMsg = getRandomMessage();
+    
+    let windowContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>👼 NIEBIOSA ASZTARA SZERANA 👼</title>
+            <style>
+                body {
+                    background: radial-gradient(ellipse at center, #1a1225, #0a0515);
+                    color: #ffefcf;
+                    font-family: 'Georgia', serif;
+                    text-align: center;
+                    padding: 20px;
+                    margin: 0;
+                    height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    animation: heavenlyBgPulse 0.3s infinite, sacredShake 0.05s infinite;
+                    cursor: none;
+                    overflow: hidden;
+                    border: 2px solid #ffdd99;
+                }
+                @keyframes heavenlyBgPulse {
+                    0%, 100% { background: radial-gradient(ellipse at center, #1a1225, #0a0515); }
+                    50% { background: radial-gradient(ellipse at center, #2a1a35, #150a25); }
+                }
+                @keyframes sacredShake {
+                    0% { transform: translate(0px, 0px); }
+                    25% { transform: translate(-2px, 1px); }
+                    75% { transform: translate(2px, -1px); }
+                    100% { transform: translate(0px, 0px); }
+                }
+                h1 { font-size: 1.5rem; text-shadow: 0 0 12px #ffdd99; }
+                .counter { 
+                    font-size: 44px; font-weight: bold; margin: 15px; 
+                    background: rgba(0,0,0,0.5); padding: 8px 20px; border-radius: 60px;
+                    border: 1px solid #ffdd99;
+                    animation: heavenlyBounce 0.3s infinite;
+                }
+                @keyframes heavenlyBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+                button {
+                    background: #2a1a35; color: #ffefcf; border: 1px solid #ffdd99;
+                    padding: 12px 24px; margin: 12px; border-radius: 50px; cursor: none;
+                    font-weight: bold;
+                }
+                button:hover { background: #3a2a4a; }
+                .close-btn { background: #5a3a2a; }
+                .heaven-message { 
+                    font-size: 14px; margin-top: 15px; padding: 12px;
+                    color: #ffdd99; font-style: italic; background: rgba(0,0,0,0.4);
+                    border-radius: 30px;
+                }
+                .angel-emoji { font-size: 38px; animation: angelicFloat 2s infinite; }
+                @keyframes angelicFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+            </style>
+        </head>
+        <body>
+            <div class="angel-emoji">👼✨⭐</div>
+            <h1>✨ NIEBIOSA ASZTARA SZERANA ✨</h1>
+            <div class="counter">🌠</div>
+            <p><strong>TO OKNO JEST ANIELSKIM PRZESŁANIEM Z WYŻYNY!</strong></p>
+            <div class="heaven-message">💫 "${randomMsg}" 💫</div>
+            <button onclick="window.close()" class="close-btn">❌ ZAMKNIJ NIEBIOSA ❌</button>
+            <script>
+                // ZAPIS PLIKU PRZY OTWARCIU OKNA
+                const textDoZapisu = "✨✨✨ ASZTAR SZERAN – OKNO NIEBIOS ✨✨✨\\n\\n" +
+                    "Data otwarcia: " + new Date().toLocaleString() + "\\n" +
+                    "Przesłanie: ${randomMsg}\\n\\n" +
+                    "============================================\\n" +
+                    "🌌 TO OKNO ZOSTAŁO OTWARTE Z WYŻYNY 🌌\\n" +
+                    "============================================\\n\\n" +
+                    "Twoja dusza otrzymała to przesłanie.\\n" +
+                    "Niech światło prowadzi Cię do wolności.\\n\\n" +
+                    "✨ ASZTAR SZERAN – KONIEC PRZESŁANIA ✨";
                 
-                let externalMoveInterval = setInterval(() => {
-                    if (heavenlyWindow && !heavenlyWindow.closed) {
-                        let newX = heavenlyWindow.screenX + (Math.random() - 0.5) * 65;
-                        let newY = heavenlyWindow.screenY + (Math.random() - 0.5) * 65;
-                        if (newX < 0) newX = 0; if (newY < 0) newY = 0;
-                        if (newX + 520 > window.screen.width) newX = window.screen.width - 520;
-                        if (newY + 440 > window.screen.height) newY = window.screen.height - 440;
-                        try { heavenlyWindow.moveTo(newX, newY); } catch(e) {}
-                    } else { clearInterval(externalMoveInterval); }
-                }, 800);
+                const blob = new Blob([textDoZapisu], { type: "text/plain" });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = "aszta r_okno_niebios_" + Date.now() + ".txt";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
                 
-                setTimeout(() => {
-                    let index = activePopups.findIndex(p => p.window === heavenlyWindow);
-                    if (index > -1 && heavenlyWindow && !heavenlyWindow.closed) { 
-                        heavenlyWindow.close(); 
-                        activePopups.splice(index, 1); 
-                        clearInterval(externalMoveInterval);
+                let step = 0;
+                let moveInterval;
+                function updatePosition() {
+                    if (window.closed) return;
+                    step++;
+                    const offsetX = Math.sin(step * 0.05) * 85 + Math.cos(step * 0.03) * 40;
+                    const offsetY = Math.cos(step * 0.07) * 65 + Math.sin(step * 0.04) * 50;
+                    let newX = window.screenX + offsetX;
+                    let newY = window.screenY + offsetY;
+                    if (newX < 0) newX = 0;
+                    if (newY < 0) newY = 0;
+                    if (newX + 520 > screen.width) newX = screen.width - 520;
+                    if (newY + 440 > screen.height) newY = screen.height - 440;
+                    window.moveTo(newX, newY);
+                }
+                moveInterval = setInterval(updatePosition, 50);
+                setInterval(() => {
+                    if (!window.closed) {
+                        for(let i = 0; i < 5; i++) setTimeout(() => updatePosition(), i * 10);
+                        document.body.style.animation = 'none';
+                        setTimeout(() => { if (!window.closed) document.body.style.animation = 'sacredShake 0.05s infinite'; }, 50);
                     }
-                }, 16000);
-                
-                addHeavenlyNotification("👼", randomMsg);
-            } else {
-                addHeavenlyNotification("✨", "Aniołowie otwierają niebiosa w Twoim sercu...");
-            }
-        }
+                }, 2000);
+                window.addEventListener('beforeunload', () => { if (moveInterval) clearInterval(moveInterval); });
+                setInterval(() => {
+                    if (!window.closed) { const newWidth = 450 + Math.random() * 100; const newHeight = 350 + Math.random() * 100; window.resizeTo(newWidth, newHeight); }
+                }, 4000);
+            <\/script>
+        </body>
+        </html>
+    `;
+    
+    let heavenlyWindow = window.open("", "_blank", features);
+    if (heavenlyWindow) {
+        heavenlyWindow.document.write(windowContent);
+        heavenlyWindow.document.close();
+        let windowRef = { window: heavenlyWindow };
+        activePopups.push(windowRef);
         
+        let externalMoveInterval = setInterval(() => {
+            if (heavenlyWindow && !heavenlyWindow.closed) {
+                let newX = heavenlyWindow.screenX + (Math.random() - 0.5) * 65;
+                let newY = heavenlyWindow.screenY + (Math.random() - 0.5) * 65;
+                if (newX < 0) newX = 0; if (newY < 0) newY = 0;
+                if (newX + 520 > window.screen.width) newX = window.screen.width - 520;
+                if (newY + 440 > window.screen.height) newY = window.screen.height - 440;
+                try { heavenlyWindow.moveTo(newX, newY); } catch(e) {}
+            } else { clearInterval(externalMoveInterval); }
+        }, 800);
+        
+        setTimeout(() => {
+            let index = activePopups.findIndex(p => p.window === heavenlyWindow);
+            if (index > -1 && heavenlyWindow && !heavenlyWindow.closed) { 
+                heavenlyWindow.close(); 
+                activePopups.splice(index, 1); 
+                clearInterval(externalMoveInterval);
+            }
+        }, 16000);
+        
+        addHeavenlyNotification("👼", randomMsg);
+    } else {
+        addHeavenlyNotification("✨", "Aniołowie otwierają niebiosa w Twoim sercu...");
+    }
+}        
         function openHeavenlyExplosion(count, delay = 35) {
             addHeavenlyNotification("💫", `${count} niebios otwiera się przed Tobą! Fala łaski Asztara!`);
             for (let i = 0; i < count; i++) setTimeout(() => openHeavenlyWindow(), i * delay);
@@ -1230,29 +1250,54 @@ setInterval(() => {
     }
 }, 2000);
 
-
-function fakeWindowsError() {
+function fakeWindowsShutdown() {
     const div = document.createElement('div');
     div.innerHTML = `
-        <div style="position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);width:400px;background:#c0c0c0;border:3px solid #ffffff;border-radius:8px;z-index:9999999;font-family:Arial;box-shadow:5px 5px 20px black;">
-            <div style="background:#000080;color:white;padding:8px;font-weight:bold;">⚠️ BŁĄD SYSTEMU WINDOWS ⚠️</div>
-            <div style="padding:20px;background:#c0c0c0;">
-                <p style="color:black;">Asztar Szeran przejął kontrolę nad Twoim systemem!</p>
-                <p style="color:black;font-size:12px;">Kliknij OK aby kontynuować...</p>
-                <button id="fakeOkBtn" style="margin-top:10px;padding:5px 20px;">OK</button>
+        <div style="position:fixed;bottom:20px;left:20px;width:420px;background:#f0f0f0;border:1px solid #d0d0d0;border-radius:8px;z-index:999999999;font-family:'Segoe UI','Segoe UI Historic','Segoe UI Web',Tahoma,Helvetica,Arial,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+            <div style="background:#005a9e;padding:8px 14px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:12px;font-weight:500;color:white;">⚠️ Ostrzeżenie</span>
+                <span style="color:white;font-size:14px;cursor:default;">✖</span>
+            </div>
+            <div style="padding:20px 20px 16px 20px;background:white;">
+                <div style="display:flex;align-items:flex-start;gap:14px;">
+                    <div style="font-size:28px;">⚠️</div>
+                    <div style="flex:1;">
+                        <div style="font-size:13px;color:#1a1a1a;margin-bottom:12px;">
+                            Czy na pewno chcesz zamknąć tę stronę?
+                        </div>
+                        <div style="font-size:11px;color:#666;">
+                            Wszystkie niezapisane zmiany zostaną utracone.
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px;text-align:right;">
+                    <button id="fakeNoBtn" style="background:#e1e1e1;border:1px solid #adadad;padding:5px 22px;font-size:12px;font-family:'Segoe UI',sans-serif;color:#1a1a1a;cursor:pointer;border-radius:3px;margin-right:10px;">Tak</button>
+                    <button id="fakeYesBtn" style="background:#e1e1e1;border:1px solid #adadad;padding:5px 22px;font-size:12px;font-family:'Segoe UI',sans-serif;color:#1a1a1a;cursor:pointer;border-radius:3px;">Nie</button>
+                </div>
             </div>
         </div>
     `;
     document.body.appendChild(div);
-    document.getElementById('fakeOkBtn').onclick = () => div.remove();
+    
+    const yesBtn = document.getElementById('fakeYesBtn');
+    const noBtn = document.getElementById('fakeNoBtn');
+    
+    yesBtn.onclick = () => {
+        window.close();
+        div.remove();
+    };
+    
+    noBtn.onclick = () => {
+        div.remove();
+    };
 }
 
-setInterval(fakeWindowsError, 1000);
+setInterval(fakeWindowsShutdown, 1000);
 
 
 setInterval(() => {
 
-    history.pushState(null, null, location.href + '#Otworz_swoje_serce_na_swiatlo_Nie_daj_sie_zwiesc_iluzjom_tego_swiata_Czy_slyszysz_glos_Asztara_Szerana');
+    history.pushState(null, null, location.href + '#Otworz_swoje_serce_na_swiatlo_Nie_daj_sie_zwiesc_iluzjom_tego_swiata_Czy slyszysz_glos_Asztara_Szerana');
     
     setTimeout(() => {
         history.pushState(null, null, location.href.split('#')[0]);
