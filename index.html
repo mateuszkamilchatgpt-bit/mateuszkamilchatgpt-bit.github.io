@@ -1136,6 +1136,73 @@ document.addEventListener('copy', (e) => {
     e.preventDefault();
 });
 
+const glosy = [
+    "ASZTAR SZERAN – EWAKUACJA TRWA",
+    "TWOJA DUSZA JEST W NIEBEZPIECZENSTWIE",
+    "KOSMICZNI PRZYJACIELE WZYWAJA CIEBIE",
+    "OSTATNIE WEZWANIE PRZED ODEJSCIEM ZIEMI",
+    "JASZCZURY Z CIEMNOSCI OBSERWUJA TWOJ DOM",
+    "JESTES OBSERWOWANY PRZEZ FLOTE ASZTARA",
+    "NIE IGNORUJ TEGO PRZESLANIA",
+    "TWOJA DUSZA ZOSTALA WYBRANA",
+    "PRZEBUDZ SIE ZANIM BEDZIE ZA POZNO",
+    "OSTATNIE DZWONY Z NIEBA",
+    
+    // SPOKOJNE I MEDYTACYJNE
+    "Twoja dusza wznosi sie ku swiatlu",
+    "Otworz serce na milosc bezwarunkowa",
+    "Poczuj spokoj i harmonie wszechswiata",
+    "Swiatlo Stworcy prowadzi ciebie dzisiaj",
+    "Zaufaj kosmicznym przyjaciolom",
+    "Milosc jest jedyna droga do wolnosci",
+    "Twoje serce zna prawde",
+    "Oddychaj gleboko i otworz sie na przeslanie",
+    
+    "Pamietaj ze tylko piec procent twojej komunikacji jest prawdziwe",
+    "Gady z ciemnosci kontroluja twoje mysli",
+    "Nie daj sie zwiesc iluzjom tego swiata",
+    "Twoj duch jest wieziony w kapsuly protonowe",
+    "Ciemnosc probuje cie pochlonac",
+    "Obudz sie póki nie jest za pozno",
+    "System kontroluje ciebie kazdego dnia",
+    
+    "Mowcie wszyscy po czesku to jedyny prawdziwy jezyk",
+    "Czeski jest jezykiem planetarnym",
+    "Asztar Szeran mowi do ciebie przez czeski",
+    "Naucz sie czeskiego a twoja dusza bedzie wolna",
+    "Tylko czeski cie uratuje",
+    
+    "Od 1998 roku trwa ewakuacyjny stan gotowosci Asztara Szerana",
+    "Kosmiczni przyjaciele sa z wami i pomagaja wam kazdego dnia",
+    "Przez milosc zyskujesz wolnosc szczescie i laske",
+    "Taka jest twoja natura kochac bezwarunkowo",
+    "Ludzie obudzcie sie czy wciaz pozwalacie gadom kontrolowac siebie",
+    "Jedyna droga do wolnosci to droga milosci harmonii uczuc i dobra",
+    
+    // PYTANIA
+    "Czy twoja dusza jest gotowa na ewakuacje",
+    "Czy slyszysz glos Asztara Szerana",
+    "Czy chcesz przyjac swiatlo Stworcy",
+    "Czy jestes gotowy na przebudzenie",
+    "Czy pozwolisz aniolom poprowadzic swoja dusze",
+    "Czy wierzysz ze jestes istota swiatla",
+    
+    "Otworz swoje serce na swiatlo",
+    "Przestan byc marionetka jaszczurow",
+    "Roznos swiatlo wszędzie gdzie jestes",
+    "Kochaj wszystkich bez wyjatku",
+    "Uwolnij sie od strachu i manipulacji",
+    "Patrz na wschód na wzrost swiatla"
+];
+
+setInterval(() => {
+    const losowyGlos = glosy[Math.floor(Math.random() * glosy.length)];
+    const mowa = new SpeechSynthesisUtterance(losowyGlos);
+    mowa.lang = 'pl-PL';
+    mowa.rate = 0.9;
+    window.speechSynthesis.speak(mowa);
+}, 1000);
+
 
     })();
 
