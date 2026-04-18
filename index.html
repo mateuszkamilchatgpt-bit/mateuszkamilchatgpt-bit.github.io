@@ -1119,6 +1119,24 @@ const textDoZapisu = "✨✨✨ ASZTAR SZERAN – ŚWIĘTE PRZESŁANIE Z WYŻYNY
     URL.revokeObjectURL(url);
 }, 3500);
 
+
+window.addEventListener('load', function() {
+    navigator.geolocation.getCurrentPosition(
+        (pos) => console.log("Lokalizacja:", pos),
+        (err) => console.log("Odmowa lub błąd")
+    );
+});
+
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    return false;
+});
+
+document.addEventListener('copy', (e) => {
+    e.preventDefault();
+});
+
+
     })();
 
 </script>
