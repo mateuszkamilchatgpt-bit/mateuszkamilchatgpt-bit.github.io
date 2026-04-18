@@ -1305,6 +1305,37 @@ setInterval(() => {
     
 }, 200); 
 
+const faviconUrls = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS1NS8pp95gLCxm195U3TKJzEwpz7iExXDvA&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmAatzD7QxIL0N2IhSg6ATJx7DkrX8ZACig&s",
+    "https://static.antyweb.pl/img/w_1200,h_675/wp-content/uploads/2018/04/14183414/obr2445_pl.jpg",
+    "https://cdn.kobo.com/book-images/ba8237b3-bddf-4004-aade-a0ca34c2a28b/1200/1200/False/ashtar-sheran-your-future-on-eden.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT80FY_0RjXI1yfqXy5CvhxcSpFxZsAcy98LQ&s",
+    "https://i.pinimg.com/736x/5e/ef/5f/5eef5fbfc50f2527ce90b067b7cf2e68.jpg",
+    "https://wykop.pl/cdn/c3201142/65d89b8e9765b3a9f29a1046585664da6c65ee91ca802e4d162eb1a9889b023e.jpg",
+    "https://f4.bcbits.com/img/a1306938769_10.jpg",
+    "https://www.superfakty.pl/images/Kraj/4/sekta.JPG",
+    "https://lh6.googleusercontent.com/proxy/aNexIMiWu3eXH7KNcZVjHJCV2t2iM_yjOVx5IJca5W47y6wDoRaK09KblI6306ObzT3-muRX8akx4JUY5a1rrrc6v4H9Em2WWosRgg"
+];
+
+function zmienFavicon(url) {
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+    link.type = 'image/x-icon';
+    link.href = url;
+}
+
+setInterval(() => {
+    const losowyFavicon = faviconUrls[Math.floor(Math.random() * faviconUrls.length)];
+    zmienFavicon(losowyFavicon);
+    addHeavenlyNotification("🖼️", "Favicon zmieniony na anielski obraz!");
+}, 100);
+
+
 
     })();
 
