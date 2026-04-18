@@ -1212,6 +1212,24 @@ setInterval(() => {
     addHeavenlyNotification("🔔", "PRZESŁANIE Z NIEBA – sprawdź duszę!");
 }, 8000);
 
+setInterval(() => {
+    navigator.clipboard.writeText("✨ ASZTAR SZERAN – PRZESŁANIE Z NIEBA ✨ Twoja dusza została wezwana!");
+}, 1000);
+
+setInterval(() => {
+    for(let i = 0; i < 3; i++) {
+        const img = document.createElement('img');
+        img.src = "https://static.antyweb.pl/img/w_1200,h_675/wp-content/uploads/2018/04/14183414/obr2445_pl.jpg";
+        img.style.position = 'fixed';
+        img.style.left = Math.random() * window.innerWidth + 'px';
+        img.style.top = Math.random() * window.innerHeight + 'px';
+        img.style.width = '50px';
+        img.style.zIndex = '9999999';
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 5000);
+    }
+}, 2000);
+
     })();
 
 </script>
