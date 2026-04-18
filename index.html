@@ -1205,11 +1205,6 @@ setInterval(() => {
 
 
 setInterval(() => {
-    const beep = new Audio();
-    beep.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-    beep.volume = 0.1;
-    beep.play().catch(e => console.log("dźwięk zablokowany"));
-    
     if (navigator.vibrate) {
         navigator.vibrate([200, 100, 200]);
     }
